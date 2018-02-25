@@ -70,6 +70,23 @@ class WebClient{
         })
     }
 
+    fun responseNextOffers(url: String){
+        val request = Request.Builder()
+                .url(url)
+                .build()
+        val response = client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call?, response: Response?){
+                body = response!!.body()!!.string()!!
+                println(body)
+
+            }
+            override fun onFailure(call: Call?, e: IOException?) {
+                Log.e(ERRO,ERRO)
+                responseNextOffers(url)
+            }
+        })
+    }
+
 
 
 }

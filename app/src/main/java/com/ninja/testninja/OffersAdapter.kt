@@ -1,6 +1,7 @@
 package com.ninja.testninja
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +37,15 @@ class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
         view.setOnClickListener {
             println(adapterPosition)
             println("MUDE")
+            val intet = Intent(view.context,NextOfferActivity::class.java)
+            view.context.startActivity(intet)
+            //nextView(adapterPosition)
             //funcao e pegar o posicao
         }
+    }
+
+    fun nextView(valor:Int){
+        WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
+        //view.context.startActivity()
     }
 }

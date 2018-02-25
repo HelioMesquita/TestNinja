@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:launchMode="singleTop"
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -20,6 +21,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".NextOfferActivity"
+            android:launchMode="singleTop">
+            <meta-data android:name="android.support.transition"
+                android:value=".MainActivity"/>
+
         </activity>
     </application>
 
