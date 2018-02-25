@@ -1,6 +1,7 @@
 package com.ninja.testninja
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ class OffersFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_offers, container, false)
 
 
+        WebClient().requestInicial("https://testemobile.getninjas.com.br/",view.RecyclerViewOffers,view.context, MainActivity())
 
         return view
     }
