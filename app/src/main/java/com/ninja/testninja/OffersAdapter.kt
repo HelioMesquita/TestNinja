@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.custom_cell.view.*
+import kotlinx.android.synthetic.main.custom_cell_main.view.*
 
 //CREATOFFERS
 class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
-        val cellForRow = layoutInflater.inflate(R.layout.custom_cell,parent,false)
+        val cellForRow = layoutInflater.inflate(R.layout.custom_cell_main,parent,false)
         return CustomViewHolder(cellForRow)
     }
 
@@ -35,17 +35,14 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
     init {
         view.setOnClickListener {
-            println(adapterPosition)
-            println("MUDE")
-            val intet = Intent(view.context,NextOfferActivity::class.java)
-            view.context.startActivity(intet)
-            //nextView(adapterPosition)
-            //funcao e pegar o posicao
+            nextView()
         }
     }
 
-    fun nextView(valor:Int){
-        WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
-        //view.context.startActivity()
+    fun nextView(){
+        //WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
+        val intet = Intent(view.context,NextOfferActivity::class.java)
+        Singleton.offersNext = Singleton.offers.offers[adapterPosition]
+        view.context.startActivity(intet)
     }
 }
