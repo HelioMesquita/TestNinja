@@ -28,7 +28,19 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        val a = SectionsPageAdapter(supportFragmentManager)
 
+        setupViewPager(container)
+        tabs.setupWithViewPager(container)
+
+
+    }
+
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = SectionsPageAdapter(supportFragmentManager)
+        adapter.addFragment(OffersFragment(), "DISPONIVEL")
+        adapter.addFragment(LeadsFragment(),"Aceitos")
+        viewPager.adapter = adapter
     }
 
 
