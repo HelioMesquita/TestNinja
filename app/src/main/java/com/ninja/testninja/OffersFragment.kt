@@ -19,7 +19,10 @@ class OffersFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_offers, container, false)
 
 
-        WebClient().requestInicial("https://testemobile.getninjas.com.br/",view.RecyclerViewOffers,view.context, MainActivity())
+        WebClient().requestInicial("https://testemobile.getninjas.com.br/",
+                view.RecyclerViewOffers,view.context, MainActivity())
+
+        view.RecyclerViewOffers
 
         return view
     }

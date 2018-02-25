@@ -31,4 +31,12 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
 
 }
 
-class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view)
+class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    init {
+        view.setOnClickListener {
+            println(adapterPosition)
+            println("MUDE")
+            //funcao e pegar o posicao
+        }
+    }
+}

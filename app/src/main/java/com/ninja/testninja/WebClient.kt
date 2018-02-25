@@ -25,7 +25,6 @@ class WebClient{
         val response = client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call?, response: Response?){
                 body = response!!.body()!!.string()!!
-                println(body)
                 parse.ParseInicial(body!!, RecyclerView,context,activity)
 
             }

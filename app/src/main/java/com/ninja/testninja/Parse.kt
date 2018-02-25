@@ -12,12 +12,13 @@ class Parse{
     private lateinit var recyclerView: RecyclerView
     fun ParseInicial(body:String, recyclerView: RecyclerView, context: Context, activity: Activity){
         val obj = gson.fromJson(body, startLinks::class.java)
+        Singleton.mainLinks=obj
         WebClient().responseOffers(obj._links.offers.href,recyclerView,context,activity)
     }
 
     fun parseOffers(body: String?, recyclerView: RecyclerView, context: Context, activity: Activity) {
         val obj = gson.fromJson(body,CreatOffers::class.java)
-
+        Singleton.offers=obj
         activity.runOnUiThread {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = OffersAdapter(obj)
