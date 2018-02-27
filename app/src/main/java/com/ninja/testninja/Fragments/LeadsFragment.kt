@@ -1,4 +1,4 @@
-package com.ninja.testninja
+package com.ninja.testninja.Fragments
 
 
 import android.os.Bundle
@@ -6,9 +6,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ninja.testninja.Activitys.MainActivity
+import com.ninja.testninja.R
+import com.ninja.testninja.Others.Singleton
+import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
-class LeadsFragment : Fragment() {
+class LeadsFragment : Fragment(){
+
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -17,9 +22,16 @@ class LeadsFragment : Fragment() {
 
 
 
+        Singleton.requistLeadsParameters(view.RecylerViewLeads,view.context, MainActivity())
+
+
+
 
 
         return view
     }
+
+
+
 
 }

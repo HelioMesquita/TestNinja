@@ -3,5 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorBlueGet">#00BFFF</color>
+    <color name="colorBlueGet">#01B9FD</color>
+    <color name="colorBlueGetHead">#2196f3</color>
 </resources>

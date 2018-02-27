@@ -41,7 +41,7 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
-        android:layout_height="18dp"
+        android:layout_height="19dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
@@ -62,7 +62,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:srcCompat="@drawable/iconipessoa" />
+        app:srcCompat="@drawable/iconipessoaverde" />
 
     <TextView
         android:id="@+id/textView_lugar"
@@ -87,7 +87,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPessoa"
-        app:srcCompat="@drawable/iconilugar" />
+        app:srcCompat="@drawable/iconilugarverde" />
 
     <TextView
         android:layout_width="wrap_content"

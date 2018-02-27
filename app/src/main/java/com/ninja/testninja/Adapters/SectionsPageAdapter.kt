@@ -1,4 +1,4 @@
-package com.ninja.testninja
+package com.ninja.testninja.Adapters
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

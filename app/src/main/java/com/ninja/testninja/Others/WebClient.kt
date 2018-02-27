@@ -1,4 +1,4 @@
-package com.ninja.testninja
+package com.ninja.testninja.Others
 
 import android.app.Activity
 import android.content.Context
