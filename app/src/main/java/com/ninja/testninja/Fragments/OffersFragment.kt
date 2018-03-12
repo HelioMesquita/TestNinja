@@ -23,7 +23,6 @@ class OffersFragment : Fragment() {
         WebClient().requestInicial("https://testemobile.getninjas.com.br/",
                 view.RecyclerViewOffers,view.context, MainActivity())
 
-        view.RecyclerViewOffers
 
 
 

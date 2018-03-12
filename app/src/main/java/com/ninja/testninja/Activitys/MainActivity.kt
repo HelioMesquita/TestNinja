@@ -10,6 +10,10 @@ import com.ninja.testninja.Fragments.OffersFragment
 import com.ninja.testninja.R
 
 import kotlinx.android.synthetic.main.activity_main.*
+import com.ninja.testninja.R.id.toolbar
+import android.support.design.widget.AppBarLayout
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,10 +25,15 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+
         val a = SectionsPageAdapter(supportFragmentManager)
 
         setupViewPager(container)
         tabs.setupWithViewPager(container)
+
+        val bar = toolbar.layoutParams as AppBarLayout.LayoutParams
+        bar.scrollFlags = 0
+        toolbar.layoutParams = bar
 
 
     }

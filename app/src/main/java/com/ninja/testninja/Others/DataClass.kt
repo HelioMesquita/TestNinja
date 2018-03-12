@@ -1,13 +1,22 @@
 package com.ninja.testninja.Others
 
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import java.util.*
+
 data class startLinks(val _links: _links)
 data class _links(val leads: Leads, val offers: Offers, val self: Self)
 data class Resquest(val title:String)
 data class Self(val href:String)
 data class request( val created_at:String,val title:String,val _embedded: _embedded)
-data class _embedded(val request: request, val address: Address, val user: User)
-data class Address(val city:String,val neighborhood:String,val uf:String,val street:String)
-data class User(val name:String,val email:String)
+data class _embedded(val request: request, val address: Address, val user: User,val info:List<Info>){
+    constructor(request: request,address: Address,user: User,info:List<Info>,phones:String) : this(request,address,user,info)
+}
+
+
+
+data class Address(val city:String,val neighborhood:String,val uf:String,val street:String,val geolocation:Geolocation)
+data class User(val name:String,val email:String,val _embedded: _embedded)
 
 class CreatOffers(val offers: List<Offers>, val _links: _links)
 class CreatLeads(val leads:List<Leads>, val _links: _links)
@@ -23,3 +32,11 @@ data class Leads(val created_at:String,
                  val resquest: Resquest,
                  val _links: _links,
                  val href:String)
+//FAZER o LINKS tirando o val _embedded:_embedded
+data class OffersNext(val distance:String,val lead_price:String,val title:String,val _embedded:_embedded)
+
+data class Info(val label:String,val value: Any)
+
+data class Geolocation(val latitude:Double,val longitude:Double)
+
+

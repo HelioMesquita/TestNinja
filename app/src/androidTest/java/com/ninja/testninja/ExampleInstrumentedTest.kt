@@ -20,5 +20,13 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("com.ninja.testninja", appContext.packageName)
+        assertFalse(false)
+    }
+
+    @Test
+    fun ahhh() {
+        // Context of the app under test.
+
+        assertFalse(true)
     }
 }

@@ -2,8 +2,9 @@ package com.ninja.testninja.Activitys
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import android.view.MenuItem
+import com.ninja.testninja.Fragments.OffersNextFragment
+import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
 
 
@@ -16,6 +17,12 @@ class NextOfferActivity : AppCompatActivity() {
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.title = "Oferta"
 
+        val fm = supportFragmentManager
+        val ft = fm.beginTransaction()
+        val nextFragment = OffersNextFragment()
+        ft.add(R.id.mainFragment,nextFragment)
+        ft.commit()
+
 
     }
 
@@ -23,7 +30,6 @@ class NextOfferActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
@@ -32,7 +38,6 @@ class NextOfferActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        startActivity(Intent(this, MainActivity::class.java))
         finish()
         return
     }

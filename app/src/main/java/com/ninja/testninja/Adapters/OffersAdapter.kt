@@ -10,12 +10,12 @@ import com.ninja.testninja.Others.CreatOffers
 import com.ninja.testninja.Activitys.NextOfferActivity
 import com.ninja.testninja.R
 import com.ninja.testninja.Others.Singleton
-import kotlinx.android.synthetic.main.custom_cell_main.view.*
+import kotlinx.android.synthetic.main.custom_cell_offer.view.*
 
 class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomViewHolderOffers>(){
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolderOffers {
         val layoutInflater = LayoutInflater.from(parent?.context)
-        val cellForRow = layoutInflater.inflate(R.layout.custom_cell_main,parent,false)
+        val cellForRow = layoutInflater.inflate(R.layout.custom_cell_offer,parent,false)
         return CustomViewHolderOffers(cellForRow)
     }
 

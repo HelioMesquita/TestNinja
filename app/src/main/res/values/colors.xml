@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlueGet">#01B9FD</color>
     <color name="colorBlueGetHead">#2196f3</color>
+    <color name="white">#ffffffff</color>
+    <color name="meiodark">#4a4a4a</color>
+    <color name="othersBlue">#4EC6FE</color>
 </resources>

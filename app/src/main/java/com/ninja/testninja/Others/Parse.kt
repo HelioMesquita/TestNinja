@@ -5,12 +5,16 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import com.ninja.testninja.Activitys.NextOfferActivity
 import com.ninja.testninja.Adapters.LeadsAdapter
 import com.ninja.testninja.Adapters.OffersAdapter
+import com.ninja.testninja.Adapters.OffersNextAdapter
+import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
 class Parse{
-    private val gson = GsonBuilder().create()
+    private val gson = GsonBuilder()
+            .create()
     //private lateinit var recyclerView: RecyclerView
     fun ParseInicial(body:String, recyclerView: RecyclerView, context: Context, activity: Activity){
         val obj = gson.fromJson(body, startLinks::class.java)
@@ -40,6 +44,32 @@ class Parse{
 
     }
 
+    fun parseNextOffers(body: String, context: Context, nextOfferActivity: NextOfferActivity, recyclerNextView: RecyclerView) {
+        val obj = gson.fromJson(body, OffersNext::class.java)
+        nextOfferActivity.runOnUiThread {
+            recyclerNextView.layoutManager = LinearLayoutManager(context)
+            recyclerNextView.recyclerView.adapter = OffersNextAdapter(obj)
+        }
+
+
+
+        /**
+        println("aqqqqqq")
+        println(obj._embedded.info[1].value.toString())
+        var aa = obj._embedded.info[1].value.toString()
+        aa=aa.replace("[","")
+        aa=aa.replace("]","")
+        println(aa)
+        println(obj._embedded.info[0].value.equals(String))
+
+        val a = obj._embedded.info[0]
+        **/
+
+    }
+
+
+
+//
 
 }
 
