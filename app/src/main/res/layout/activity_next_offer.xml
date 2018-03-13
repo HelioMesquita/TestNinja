@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_offers_next"
         tools:layout_editor_absoluteX="-14dp"
-        tools:layout_editor_absoluteY="32dp" />
-
+        tools:layout_editor_absoluteY="32dp"
+        android:layout_margin="10dp"/>
 
 
 </ScrollView>

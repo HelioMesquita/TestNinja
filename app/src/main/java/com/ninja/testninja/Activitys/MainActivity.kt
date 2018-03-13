@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         toolbar.layoutParams = bar
 
 
+
+
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

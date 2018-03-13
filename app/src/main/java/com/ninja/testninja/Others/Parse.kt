@@ -46,24 +46,17 @@ class Parse{
 
     fun parseNextOffers(body: String, context: Context, nextOfferActivity: NextOfferActivity, recyclerNextView: RecyclerView) {
         val obj = gson.fromJson(body, OffersNext::class.java)
+
+
+
+
+
         nextOfferActivity.runOnUiThread {
             recyclerNextView.layoutManager = LinearLayoutManager(context)
             recyclerNextView.recyclerView.adapter = OffersNextAdapter(obj)
         }
 
 
-
-        /**
-        println("aqqqqqq")
-        println(obj._embedded.info[1].value.toString())
-        var aa = obj._embedded.info[1].value.toString()
-        aa=aa.replace("[","")
-        aa=aa.replace("]","")
-        println(aa)
-        println(obj._embedded.info[0].value.equals(String))
-
-        val a = obj._embedded.info[0]
-        **/
 
     }
 

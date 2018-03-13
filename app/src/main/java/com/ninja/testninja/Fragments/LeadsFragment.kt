@@ -12,6 +12,7 @@ import com.ninja.testninja.Others.Singleton
 import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
+
 class LeadsFragment : Fragment(){
 
 
