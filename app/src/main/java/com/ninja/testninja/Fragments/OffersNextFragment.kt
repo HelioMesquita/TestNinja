@@ -1,6 +1,7 @@
 package com.ninja.testninja.Fragments
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -57,6 +58,7 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback {
 
 
     class implementAll(val view: View){
+        @SuppressLint("SetTextI18n")
         fun implement(offersNext: OffersNext){
             view.textViewTitleFragmet.text=offersNext.title
             view.textViewClient.text=Singleton.offersNext._embedded.request._embedded.user.name
@@ -64,16 +66,17 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback {
                     " - " +Singleton.offersNext._embedded.request._embedded.address.city
 
             view.textViewEmail.text=offersNext._embedded.user.email
-            view.textViewDistance.text=offersNext.distance
 
+            var a = offersNext.distance
+            a=a[0].toString()+a[1].toString()
+
+            view.textViewDistance.text= "a $a km de voce"
 
             var phone = offersNext._embedded.user._embedded.phones[0].number.toString()
             phone=phone.replace("[","")
             phone=phone.replace("]","")
             view.textViewNumber.text=phone
 
-
-            //view.textViewNumber.text=offersNext._embedded.user._embedded
         }
 
     }
