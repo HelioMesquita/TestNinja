@@ -9,9 +9,8 @@ data class _links(val leads: Leads, val offers: Offers, val self: Self)
 data class Resquest(val title:String)
 data class Self(val href:String)
 data class request( val created_at:String,val title:String,val _embedded: _embedded)
-data class _embedded(val request: request, val address: Address, val user: User,val info:List<Info>){
-    constructor(request: request,address: Address,user: User,info:List<Info>,phones:String) : this(request,address,user,info)
-}
+data class _embedded(val request: request, val address: Address, val user: User,val info:List<Info>,val phones:List<Phones>)
+data class Phones(val number:Any)
 
 
 

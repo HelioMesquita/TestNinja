@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.ninja.testninja.Activitys.NextOfferActivity
+import com.ninja.testninja.Fragments.OffersNextFragment
 import okhttp3.*
 import java.io.IOException
 
@@ -71,14 +72,16 @@ class WebClient{
         })
     }
 
-    fun responseNextOffers(url: String, recyclerView: RecyclerView, context: Context, nextOfferActivity: NextOfferActivity){
+    fun responseNextOffers(url: String, recyclerView: RecyclerView, context: Context
+                           , nextOfferActivity: NextOfferActivity
+                           , implementAll: OffersNextFragment.implementAll){
         val request = Request.Builder()
                 .url(url)
                 .build()
         val response = client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call?, response: Response?){
                 body = response!!.body()!!.string()!!
-                parse.parseNextOffers(body!!,context,nextOfferActivity,recyclerView)
+                parse.parseNextOffers(body!!,context,nextOfferActivity,recyclerView,implementAll)
                 println(body)
 
             }

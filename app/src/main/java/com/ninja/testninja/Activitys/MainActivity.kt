@@ -12,7 +12,7 @@ import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ninja.testninja.R.id.toolbar
 import android.support.design.widget.AppBarLayout
-
+import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +34,22 @@ class MainActivity : AppCompatActivity() {
         val bar = toolbar.layoutParams as AppBarLayout.LayoutParams
         bar.scrollFlags = 0
         toolbar.layoutParams = bar
+
+        /**
+        var name: String by Delegates.observable("") {
+            prop, old, new ->
+            println("$old -> $new")
+            if (new!=""){
+                println("arrozarroz")
+            }
+        }
+        name="arroz"
+        name="e assim q funciona?"
+        name="ultimo"
+        **/
+
+
+
 
 
 

@@ -9,6 +9,7 @@ import com.ninja.testninja.Activitys.NextOfferActivity
 import com.ninja.testninja.Adapters.LeadsAdapter
 import com.ninja.testninja.Adapters.OffersAdapter
 import com.ninja.testninja.Adapters.OffersNextAdapter
+import com.ninja.testninja.Fragments.OffersNextFragment
 import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
@@ -16,14 +17,16 @@ class Parse{
     private val gson = GsonBuilder()
             .create()
     //private lateinit var recyclerView: RecyclerView
-    fun ParseInicial(body:String, recyclerView: RecyclerView, context: Context, activity: Activity){
+    fun ParseInicial(body:String, recyclerView: RecyclerView
+                     , context: Context, activity: Activity){
         val obj = gson.fromJson(body, startLinks::class.java)
         Singleton.mainLinks =obj
         WebClient().responseOffers(obj._links.offers.href,recyclerView,context,activity)
         WebClient().responseLeads(obj._links.leads.href)
     }
 
-    fun parseOffers(body: String?, recyclerView: RecyclerView, context: Context, activity: Activity) {
+    fun parseOffers(body: String?, recyclerView: RecyclerView
+                    , context: Context, activity: Activity) {
         val obj = gson.fromJson(body, CreatOffers::class.java)
         Singleton.offers =obj
         activity.runOnUiThread {
@@ -44,16 +47,16 @@ class Parse{
 
     }
 
-    fun parseNextOffers(body: String, context: Context, nextOfferActivity: NextOfferActivity, recyclerNextView: RecyclerView) {
+    fun parseNextOffers(body: String, context: Context, nextOfferActivity: NextOfferActivity
+                        , recyclerNextView: RecyclerView, implementAll: OffersNextFragment.implementAll) {
         val obj = gson.fromJson(body, OffersNext::class.java)
-
-
-
 
 
         nextOfferActivity.runOnUiThread {
             recyclerNextView.layoutManager = LinearLayoutManager(context)
             recyclerNextView.recyclerView.adapter = OffersNextAdapter(obj)
+
+            implementAll.implement(obj)
         }
 
 
