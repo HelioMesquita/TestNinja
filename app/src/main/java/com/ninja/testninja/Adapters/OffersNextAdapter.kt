@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import com.ninja.testninja.Others.OffersNext
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.custom_cell_next_offer.view.*
-import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
-
-//import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
 class OffersNextAdapter(val OffersNext: OffersNext): RecyclerView.Adapter<CustomViewHolderNextOffers>(){

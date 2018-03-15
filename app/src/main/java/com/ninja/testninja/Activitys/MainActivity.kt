@@ -1,23 +1,31 @@
 package com.ninja.testninja.Activitys
 
-import android.support.v7.app.AppCompatActivity
-
-import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import com.ninja.testninja.Adapters.SectionsPageAdapter
 import com.ninja.testninja.Fragments.LeadsFragment
 import com.ninja.testninja.Fragments.OffersFragment
+import com.ninja.testninja.Interfaces.RequestCallBack
+import com.ninja.testninja.Others.StartLinks
+import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
-
 import kotlinx.android.synthetic.main.activity_main.*
-import com.ninja.testninja.R.id.toolbar
-import android.support.design.widget.AppBarLayout
-import kotlin.properties.Delegates
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RequestCallBack {
+    override fun onSuccess(obj: Any) {
+        offersFragment.startRequestView(obj as StartLinks)
+        leadsFragment.startRequestView(obj as StartLinks)
+    }
 
+    override fun onFail() {
 
+    }
+
+    lateinit var offersFragment: OffersFragment
+    lateinit var leadsFragment: LeadsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         val a = SectionsPageAdapter(supportFragmentManager)
 
+        offersFragment = OffersFragment()
+        leadsFragment = LeadsFragment()
+
         setupViewPager(container)
         tabs.setupWithViewPager(container)
 
@@ -35,31 +46,15 @@ class MainActivity : AppCompatActivity() {
         bar.scrollFlags = 0
         toolbar.layoutParams = bar
 
-        /**
-        var name: String by Delegates.observable("") {
-            prop, old, new ->
-            println("$old -> $new")
-            if (new!=""){
-                println("arrozarroz")
-            }
-        }
-        name="arroz"
-        name="e assim q funciona?"
-        name="ultimo"
-        **/
 
-
-
-
-
-
+        WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
 
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = SectionsPageAdapter(supportFragmentManager)
-        adapter.addFragment(OffersFragment(), "DISPONIVEL")
-        adapter.addFragment(LeadsFragment(),"Aceitos")
+        adapter.addFragment(offersFragment, "DISPONIVEL")
+        adapter.addFragment(leadsFragment, "Aceitos")
         viewPager.adapter = adapter
     }
 

@@ -1,10 +1,6 @@
 package com.ninja.testninja.Others
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import java.util.*
-
-data class startLinks(val _links: _links)
+data class StartLinks(var _links: _links)
 data class _links(val leads: Leads, val offers: Offers, val self: Self)
 data class Resquest(val title:String)
 data class Self(val href:String)

@@ -1,71 +1,32 @@
 package com.ninja.testninja.Others
 
-import android.app.Activity
-import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.google.gson.GsonBuilder
-import com.ninja.testninja.Activitys.NextOfferActivity
-import com.ninja.testninja.Adapters.LeadsAdapter
-import com.ninja.testninja.Adapters.OffersAdapter
-import com.ninja.testninja.Adapters.OffersNextAdapter
-import com.ninja.testninja.Fragments.OffersNextFragment
-import kotlinx.android.synthetic.main.fragment_offers_next.view.*
+import com.ninja.testninja.Interfaces.RequestCallBack
+
 
 
 class Parse{
-    private val gson = GsonBuilder()
-            .create()
-    //private lateinit var recyclerView: RecyclerView
-    fun ParseInicial(body:String, recyclerView: RecyclerView
-                     , context: Context, activity: Activity){
-        val obj = gson.fromJson(body, startLinks::class.java)
-        Singleton.mainLinks =obj
-        WebClient().responseOffers(obj._links.offers.href,recyclerView,context,activity)
-        WebClient().responseLeads(obj._links.leads.href)
-    }
+    private val gson = GsonBuilder().create()
 
-    fun parseOffers(body: String?, recyclerView: RecyclerView
-                    , context: Context, activity: Activity) {
-        val obj = gson.fromJson(body, CreatOffers::class.java)
-        Singleton.offers =obj
-        activity.runOnUiThread {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = OffersAdapter(obj)
-        }
-        //someTaskOffers(recyclerView,context,obj).execute()
-
-    }
-
-    fun parseLeads(body: String?) {
-        val obj = gson.fromJson(body, CreatLeads::class.java)
-        Singleton.leads = obj
-        Singleton.mainActivity.runOnUiThread {
-            Singleton.recylerViewLeads.layoutManager = LinearLayoutManager(Singleton.context)
-            Singleton.recylerViewLeads.adapter = LeadsAdapter(obj)
+    companion object {
+        fun parseInitial(body: String, delegate: RequestCallBack) {
+            delegate.onSuccess(GsonBuilder().create().fromJson(body, StartLinks::class.java))
         }
 
-    }
+        fun parseOffers(body: String, delegate: RequestCallBack) {
+            delegate.onSuccess(GsonBuilder().create().fromJson(body, CreatOffers::class.java))
+        }
 
-    fun parseNextOffers(body: String, context: Context, nextOfferActivity: NextOfferActivity
-                        , recyclerNextView: RecyclerView, implementAll: OffersNextFragment.implementAll) {
-        val obj = gson.fromJson(body, OffersNext::class.java)
+        fun parseLeads(body: String, delegate: RequestCallBack) {
+            delegate.onSuccess(GsonBuilder().create().fromJson(body, CreatLeads::class.java))
+        }
 
-
-        nextOfferActivity.runOnUiThread {
-            recyclerNextView.layoutManager = LinearLayoutManager(context)
-            recyclerNextView.recyclerView.adapter = OffersNextAdapter(obj)
-
-            implementAll.implement(obj)
+        fun parseNextOffers(body: String, delegate: RequestCallBack) {
+            delegate.onSuccess(GsonBuilder().create().fromJson(body, OffersNext::class.java))
         }
 
 
-
     }
-
-
-
-//
 
 }
 

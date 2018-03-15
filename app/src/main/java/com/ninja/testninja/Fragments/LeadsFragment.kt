@@ -3,18 +3,41 @@ package com.ninja.testninja.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ninja.testninja.Activitys.MainActivity
-import com.ninja.testninja.R
+import com.ninja.testninja.Adapters.LeadsAdapter
+import com.ninja.testninja.Interfaces.RequestCallBack
+import com.ninja.testninja.Interfaces.StarView
+import com.ninja.testninja.Others.CreatLeads
 import com.ninja.testninja.Others.Singleton
+import com.ninja.testninja.Others.StartLinks
+import com.ninja.testninja.Others.WebClient
+import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
+class LeadsFragment : Fragment(), StarView, RequestCallBack {
+    override fun popularRecyclerView(obj: Any) {
+        Singleton.leads = obj as CreatLeads
+        activity.runOnUiThread {
+            view!!.RecylerViewLeads.layoutManager = LinearLayoutManager(context)
+            view!!.RecylerViewLeads.adapter = LeadsAdapter(obj as CreatLeads)
+        }
+    }
 
-class LeadsFragment : Fragment(){
+    override fun onSuccess(obj: Any) {
+        popularRecyclerView(obj)
+    }
 
+    override fun onFail() {
+
+    }
+
+    override fun startRequestView(obj: Any) {
+        WebClient.responseLeads(obj as StartLinks, this)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -23,7 +46,7 @@ class LeadsFragment : Fragment(){
 
 
 
-        Singleton.requistLeadsParameters(view.RecylerViewLeads,view.context, MainActivity())
+
 
 
 
@@ -31,8 +54,6 @@ class LeadsFragment : Fragment(){
 
         return view
     }
-
-
 
 
 }

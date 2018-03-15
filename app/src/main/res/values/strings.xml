@@ -16,4 +16,6 @@
     <string name="contato_do_cliente">Contato do Cliente</string>
     <string name="aceite_o_pedido_para_destravar_o_contato">Aceite o pedido para destravar o contato!</string>
     <string name="title_activity_maps">Map</string>
+    <string name="recusar">RECUSAR</string>
+    <string name="aceitar">ACEITAR</string>
 </resources>
