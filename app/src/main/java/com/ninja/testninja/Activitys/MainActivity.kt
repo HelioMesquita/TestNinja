@@ -58,6 +58,14 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         viewPager.adapter = adapter
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
+    }
 
+    override fun onResume() {
+        super.onResume()
+        WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
+    }
 
 }

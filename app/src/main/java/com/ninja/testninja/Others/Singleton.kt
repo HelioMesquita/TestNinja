@@ -5,4 +5,5 @@ object Singleton {
     lateinit var offers: CreatOffers
     lateinit var offersNext: Offers
     lateinit var leads: CreatLeads
+    lateinit var leadsNext: Leads
 }

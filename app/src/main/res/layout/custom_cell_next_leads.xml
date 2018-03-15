@@ -14,7 +14,7 @@
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/iconilugar"
+        app:srcCompat="@drawable/iconilugarverde"
         android:layout_marginLeft="16dp" />
 
     <TextView

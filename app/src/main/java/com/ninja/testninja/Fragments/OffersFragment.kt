@@ -29,9 +29,11 @@ class OffersFragment : Fragment(), StarView, RequestCallBack {
 
     override fun popularRecyclerView(obj: Any) {
         Singleton.offers = obj as CreatOffers
-        activity.runOnUiThread {
-            view!!.RecyclerViewOffers.layoutManager = LinearLayoutManager(context)
-            view!!.RecyclerViewOffers.adapter = OffersAdapter(obj as CreatOffers)
+        if(activity !=null){
+            activity.runOnUiThread {
+                view!!.RecyclerViewOffers.layoutManager = LinearLayoutManager(context)
+                view!!.RecyclerViewOffers.adapter = OffersAdapter(obj as CreatOffers)
+            }
         }
     }
 

@@ -6,11 +6,6 @@ import java.io.IOException
 
 
 class WebClient {
-    private val client = OkHttpClient()
-    private var body: String? = null
-    private val ERRO = "erro"
-    private val parse = Parse()
-
     companion object {
         fun requestInitial(delegate: RequestCallBack, url: String) {
             OkHttpClient().newCall(Request.Builder().url(url).build()).enqueue(object : Callback {
@@ -62,7 +57,23 @@ class WebClient {
                             .url(obj._links.self.href)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
-                            Parse.parseNextOffers(response!!.body()!!.string()!!, delegate)
+                            Parse.parseNext(response!!.body()!!.string()!!, delegate)
+
+                        }
+
+                        override fun onFailure(call: Call?, e: IOException?) {
+                            delegate.onFail()
+                        }
+                    })
+        }
+
+        fun responseNextLeads(obj: Leads, delegate: RequestCallBack) {
+            OkHttpClient()
+                    .newCall(Request.Builder()
+                            .url(obj._links.self.href)
+                            .build()).enqueue(object : Callback {
+                        override fun onResponse(call: Call?, response: Response?) {
+                            Parse.parseNext(response!!.body()!!.string()!!, delegate)
 
                         }
 

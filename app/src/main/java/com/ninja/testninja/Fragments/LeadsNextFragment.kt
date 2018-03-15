@@ -14,13 +14,19 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.FragmentsPopular
 import com.ninja.testninja.Others.PageNext
-import com.ninja.testninja.Others.Singleton
+
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers_next.*
 import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
-class OffersNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
+class LeadsNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
+    override fun onMapReady(googleMap: GoogleMap?) {
+        val mMap = googleMap
+        MapsInitializer.initialize(view?.context)
+        googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
+    }
+
     override fun popularFragment(obj: Any) {
         if(activity !=null) {
             implement(obj as PageNext)
@@ -31,27 +37,19 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
     override fun popularRecyclerView(obj: Any) {
         activity.runOnUiThread {
             view!!.recyclerView.layoutManager = LinearLayoutManager(context)
-            view!!.recyclerView.recyclerView.adapter = NextPageAdapter(obj as PageNext,R.layout.custom_cell_next_offer)
+            view!!.recyclerView.recyclerView.adapter = NextPageAdapter(obj as PageNext,R.layout.custom_cell_next_leads)
         }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater!!.inflate(R.layout.fragment_offers_next, container, false)
+
+        val view = inflater!!.inflate(R.layout.fragment_leads_next, container, false)
+
+
 
         return view
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        if(mapView!=null){
-            mapView.onCreate(null)
-            mapView.onResume()
-            mapView.getMapAsync(this)
-        }
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -76,11 +74,15 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
         }
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        val mMap = googleMap
-        MapsInitializer.initialize(view?.context)
-        googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
+        if(mapView!=null){
+            mapView.onCreate(null)
+            mapView.onResume()
+            mapView.getMapAsync(this)
+        }
+
     }
-}
 
+}// Required empty public constructor

@@ -21,9 +21,11 @@ import kotlinx.android.synthetic.main.fragment_leads.view.*
 class LeadsFragment : Fragment(), StarView, RequestCallBack {
     override fun popularRecyclerView(obj: Any) {
         Singleton.leads = obj as CreatLeads
-        activity.runOnUiThread {
-            view!!.RecylerViewLeads.layoutManager = LinearLayoutManager(context)
-            view!!.RecylerViewLeads.adapter = LeadsAdapter(obj as CreatLeads)
+        if(activity !=null) {
+            activity.runOnUiThread {
+                view!!.RecylerViewLeads.layoutManager = LinearLayoutManager(context)
+                view!!.RecylerViewLeads.adapter = LeadsAdapter(obj as CreatLeads)
+            }
         }
     }
 
@@ -43,11 +45,6 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_leads, container, false)
-
-
-
-
-
 
 
 

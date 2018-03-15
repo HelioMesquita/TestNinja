@@ -1,54 +1,43 @@
 package com.ninja.testninja.Activitys
 
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import android.view.MenuItem
-import com.ninja.testninja.Fragments.OffersNextFragment
+import com.ninja.testninja.Fragments.LeadsNextFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
-import kotlinx.android.synthetic.main.activity_next_offer.*
 
-
-class NextOfferActivity : AppCompatActivity(), RequestCallBack {
+class NextLeadsActivity : AppCompatActivity(), RequestCallBack {
     override fun onSuccess(obj: Any) {
-        offersNextFragment.popularFragment(obj)
-
+        leadsNextFragment.popularFragment(obj)
     }
 
     override fun onFail() {
 
     }
-
-    lateinit var offersNextFragment: OffersNextFragment
+    lateinit var leadsNextFragment: LeadsNextFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_next_offer)
+        setContentView(R.layout.activity_next_leads)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.title = "Oferta"
-
+        supportActionBar!!.title = Singleton.leadsNext._embedded.user.name
 
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
 
-        offersNextFragment = OffersNextFragment()
-        ft.add(R.id.mainFragment, offersNextFragment)
+        leadsNextFragment = LeadsNextFragment()
+        ft.add(R.id.mainFragment, leadsNextFragment)
         ft.commit()
 
 
-        //OFFE Q ESTA NO SINGLENTO E A POSICAO Q ESTA OLHANDO
-        WebClient.responseNextOffers(Singleton.offersNext, this)
+        WebClient.responseNextLeads(Singleton.leadsNext, this)
 
-
-        buttonRecusar.setOnClickListener {
-            finish()
-        }
 
 
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -64,7 +53,4 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
         finish()
         return
     }
-
-
-
 }

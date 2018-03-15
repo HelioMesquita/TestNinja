@@ -28,7 +28,7 @@ data class Leads(val created_at:String,
                  val _links: _links,
                  val href:String)
 //FAZER o LINKS tirando o val _embedded:_embedded
-data class OffersNext(val distance:String,val lead_price:String,val title:String,val _embedded:_embedded)
+data class PageNext(val distance:String, val lead_price:String, val title:String, val _embedded:_embedded)
 
 data class Info(val label:String,val value: Any)
 

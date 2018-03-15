@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlueGet">
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonRecusar"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="@string/recusar" />
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:text="@string/aceitar" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttons">
+
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.ninja.testninja.Fragments.LeadsNextFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            tools:layout="@layout/fragment_offers_next"
+            tools:layout_editor_absoluteX="-14dp"
+            tools:layout_editor_absoluteY="32dp" />
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

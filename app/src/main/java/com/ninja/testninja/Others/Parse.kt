@@ -2,7 +2,8 @@ package com.ninja.testninja.Others
 
 import com.google.gson.GsonBuilder
 import com.ninja.testninja.Interfaces.RequestCallBack
-
+import okhttp3.*
+import java.io.IOException
 
 
 class Parse{
@@ -19,8 +20,8 @@ class Parse{
             delegate.onSuccess(GsonBuilder().create().fromJson(body, CreatLeads::class.java))
         }
 
-        fun parseNextOffers(body: String, delegate: RequestCallBack) {
-            delegate.onSuccess(GsonBuilder().create().fromJson(body, OffersNext::class.java))
+        fun parseNext(body: String, delegate: RequestCallBack) {
+            delegate.onSuccess(GsonBuilder().create().fromJson(body, PageNext::class.java))
         }
 
 
