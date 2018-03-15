@@ -6,8 +6,6 @@ import com.ninja.testninja.Interfaces.RequestCallBack
 
 
 class Parse{
-    private val gson = GsonBuilder().create()
-
     companion object {
         fun parseInitial(body: String, delegate: RequestCallBack) {
             delegate.onSuccess(GsonBuilder().create().fromJson(body, StartLinks::class.java))
