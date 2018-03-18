@@ -1,5 +1,6 @@
 package com.ninja.testninja.Activitys
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -29,7 +30,6 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.title = "Oferta"
 
-
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
 
@@ -37,12 +37,15 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
         ft.add(R.id.mainFragment, offersNextFragment)
         ft.commit()
 
-
-        //OFFE Q ESTA NO SINGLENTO E A POSICAO Q ESTA OLHANDO
         WebClient.responseNextOffers(Singleton.offersNext, this)
 
-
         buttonRecusar.setOnClickListener {
+            finish()
+        }
+
+        buttonAceitar.setOnClickListener {
+            Singleton.leadsNextLinks = Singleton.offersNext._links.self.href
+            startActivity(Intent(this,NextLeadsActivity::class.java))
             finish()
         }
 

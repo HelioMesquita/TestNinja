@@ -8,6 +8,7 @@ import com.ninja.testninja.Adapters.SectionsPageAdapter
 import com.ninja.testninja.Fragments.LeadsFragment
 import com.ninja.testninja.Fragments.OffersFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
+import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
     override fun onSuccess(obj: Any) {
         offersFragment.startRequestView(obj as StartLinks)
         leadsFragment.startRequestView(obj as StartLinks)
+        Singleton.mainLinks = obj as StartLinks
     }
 
     override fun onFail() {
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
 
         setSupportActionBar(toolbar)
 
-
         val a = SectionsPageAdapter(supportFragmentManager)
 
         offersFragment = OffersFragment()
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         val bar = toolbar.layoutParams as AppBarLayout.LayoutParams
         bar.scrollFlags = 0
         toolbar.layoutParams = bar
-
 
         WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.ninja.testninja.Fragments.LeadsNextFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
+import com.ninja.testninja.Others.PageNext
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
@@ -12,6 +13,9 @@ import com.ninja.testninja.R
 class NextLeadsActivity : AppCompatActivity(), RequestCallBack {
     override fun onSuccess(obj: Any) {
         leadsNextFragment.popularFragment(obj)
+        runOnUiThread {
+            supportActionBar!!.title = (obj as PageNext).title
+        }
     }
 
     override fun onFail() {
@@ -23,7 +27,7 @@ class NextLeadsActivity : AppCompatActivity(), RequestCallBack {
         setContentView(R.layout.activity_next_leads)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.title = Singleton.leadsNext._embedded.user.name
+
 
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
@@ -32,10 +36,7 @@ class NextLeadsActivity : AppCompatActivity(), RequestCallBack {
         ft.add(R.id.mainFragment, leadsNextFragment)
         ft.commit()
 
-
-        WebClient.responseNextLeads(Singleton.leadsNext, this)
-
-
+        WebClient.responseNextLeads(Singleton.leadsNextLinks, this)
 
     }
 

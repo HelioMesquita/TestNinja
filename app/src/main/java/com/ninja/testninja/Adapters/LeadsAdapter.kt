@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Activitys.NextLeadsActivity
+import com.ninja.testninja.Others.ConvertDate
 import com.ninja.testninja.Others.CreatLeads
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
@@ -32,6 +33,8 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
         holder?.view?.textView_lugar?.text=test._embedded.address.neighborhood + " - " +
                 test._embedded.address.city
 
+        holder?.view?.textViewDate?.text= ConvertDate.convet(test.created_at)
+
     }
 
 }
@@ -46,7 +49,7 @@ class CustomViewHolderLeads(val view: View): RecyclerView.ViewHolder(view){
     fun nextView(){
         //WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
         val intet = Intent(view.context, NextLeadsActivity::class.java)
-        Singleton.leadsNext = Singleton.leads.leads[adapterPosition]
+        Singleton.leadsNextLinks = Singleton.leads.leads[adapterPosition]._links.self.href
         view.context.startActivity(intet)
     }
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Others.CreatOffers
 import com.ninja.testninja.Activitys.NextOfferActivity
+import com.ninja.testninja.Others.ConvertDate
 import com.ninja.testninja.R
 import com.ninja.testninja.Others.Singleton
 import kotlinx.android.synthetic.main.custom_cell_offer.view.*
@@ -36,6 +37,8 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
             holder?.view?.imageViewLocal?.setImageResource(R.drawable.iconilugarcinza)
         }
 
+        //holder?.view?.textViewDate?.text= ConvertDate.convet(test.created_at)
+        holder?.view?.textViewDate?.text = ConvertDate.convet(test._embedded.request.created_at)
 
 
 

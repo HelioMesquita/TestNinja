@@ -67,10 +67,10 @@ class WebClient {
                     })
         }
 
-        fun responseNextLeads(obj: Leads, delegate: RequestCallBack) {
+        fun responseNextLeads(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj._links.self.href)
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseNext(response!!.body()!!.string()!!, delegate)
