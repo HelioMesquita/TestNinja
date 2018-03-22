@@ -17,6 +17,10 @@ class Factory{
             return "$neighborhood - $city"
         }
 
+        fun convertList(value:String):String{
+            return value.replace("[","").replace("]","")
+        }
+
         fun convertDistance(value: String):String{
             return "a " + (value.toInt()/1000).toString() + " km de voce"
         }
@@ -37,10 +41,6 @@ class Factory{
 
         fun creatNextText(info: Info): TextNextAdapter {
             return TextNextAdapter(info.label, convertList(info.value.toString()))
-        }
-
-        fun convertList(value:String):String{
-            return value.replace("[","").replace("]","")
         }
 
         fun creatNext(pageNext: PageNext) : TextNext{

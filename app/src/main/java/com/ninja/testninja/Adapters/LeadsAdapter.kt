@@ -44,12 +44,9 @@ class CustomViewHolderLeads(val view: View): RecyclerView.ViewHolder(view){
     }
 
     fun nextView(){
-        //WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
-        val intet = Intent(view.context, NextLeadsActivity::class.java)
         Singleton.leadsNextLinks = Singleton.leads.leads[adapterPosition]._links.self.href
-        view.context.startActivity(intet)
+        view.context.startActivity(Intent(view.context, NextLeadsActivity::class.java))
     }
-
 
 }
 

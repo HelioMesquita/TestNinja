@@ -49,9 +49,7 @@ class CustomViewHolderOffers(val view: View): RecyclerView.ViewHolder(view){
     }
 
     fun nextView(){
-        //WebClient().responseNextOffers(Singleton.offers.offers[valor]._links.self.href)
-        val intet = Intent(view.context, NextOfferActivity::class.java)
         Singleton.offersNext = Singleton.offers.offers[adapterPosition]
-        view.context.startActivity(intet)
+        view.context.startActivity(Intent(view.context, NextOfferActivity::class.java))
     }
 }

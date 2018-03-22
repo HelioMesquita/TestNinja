@@ -20,6 +20,17 @@ import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
 class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
+    override fun configRefresh() {
+        view?.swipeLeads?.setOnRefreshListener(this)
+        view?.swipeLeads?.setColorSchemeResources(R.color.colorBlueGet)
+    }
+
+    override fun testRefresh() {
+        if (view?.swipeLeads!!.isRefreshing && view?.swipeLeads!=null){
+            view?.swipeLeads!!.isRefreshing = false
+        }
+    }
+
     override fun onRefresh() {
         WebClient.responseLeadsRefresh(Singleton.leads, this)
     }
@@ -30,9 +41,7 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
         activity.runOnUiThread {
             view!!.RecylerViewLeads.layoutManager = LinearLayoutManager(context)
             view!!.RecylerViewLeads.adapter = LeadsAdapter(obj as CreatLeads)
-            if (view?.swipeLeads!!.isRefreshing && view?.swipeLeads!=null){
-                view?.swipeLeads!!.isRefreshing = false
-            }
+            testRefresh()
         }
 
     }
@@ -55,8 +64,7 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_leads, container, false)
 
-        view.swipeLeads.setOnRefreshListener(this)
-        view.swipeLeads.setColorSchemeResources(R.color.colorBlueGet)
+        configRefresh()
 
         return view
     }

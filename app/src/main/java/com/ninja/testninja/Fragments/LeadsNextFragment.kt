@@ -60,7 +60,8 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
     override fun popularRecyclerView(obj: Any) {
         activity.runOnUiThread {
             view!!.recyclerView.layoutManager = LinearLayoutManager(context)
-            view!!.recyclerView.recyclerView.adapter = NextPageAdapter(obj as PageNext,R.layout.custom_cell_next_leads)
+            view!!.recyclerView.recyclerView.adapter =
+                    NextPageAdapter(obj as PageNext,R.layout.custom_cell_next_leads)
         }
     }
 

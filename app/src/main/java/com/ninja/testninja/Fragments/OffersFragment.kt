@@ -21,14 +21,23 @@ import kotlinx.android.synthetic.main.fragment_offers.view.*
 
 
 class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
+    override fun configRefresh() {
+        view?.swipeOffers?.setOnRefreshListener(this)
+        view?.swipeOffers?.setColorSchemeResources(R.color.colorBlueGet)
+    }
+
+    override fun testRefresh() {
+        if (view?.swipeOffers!!.isRefreshing && view?.swipeOffers!=null){
+            view?.swipeOffers!!.isRefreshing = false
+        }
+    }
+
     override fun onRefresh() {
-        Log.i("teste",Singleton.offers._links.self.href)
         WebClient.responseOffersRefresh(Singleton.offers, this)
     }
 
     override fun onSuccess(obj: Any) {
         popularRecyclerView(obj)
-
     }
 
     override fun onFail() {
@@ -41,9 +50,7 @@ class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout
         activity.runOnUiThread {
             view!!.RecyclerViewOffers.layoutManager = LinearLayoutManager(context)
             view!!.RecyclerViewOffers.adapter = OffersAdapter(obj as CreatOffers)
-            if (view?.swipeOffers!!.isRefreshing && view?.swipeOffers!=null){
-                view?.swipeOffers!!.isRefreshing = false
-            }
+            testRefresh()
         }
 
     }
@@ -57,8 +64,7 @@ class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_offers, container, false)
 
-        view.swipeOffers.setOnRefreshListener(this)
-        view.swipeOffers.setColorSchemeResources(R.color.colorBlueGet)
+        configRefresh()
 
         return view
     }
