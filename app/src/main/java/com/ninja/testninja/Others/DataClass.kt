@@ -1,41 +1,97 @@
 package com.ninja.testninja.Others
 
-data class StartLinks(var _links: _links)
-data class _links(val leads: Leads, val offers: Offers, val self: Self, val accept:accept, val reject: reject)
+import com.google.gson.annotations.SerializedName
+
+data class StartLinks(
+        @SerializedName("_links")
+        val links: _links)
+{
+    fun linksLeads():String{
+        return links.leads.href
+    }
+    fun linksOffer():String{
+        return links.offers.href
+    }
+}
+
+data class _links(val leads: Leads,
+                  val offers: Offers,
+                  val self: Self,
+                  val accept:accept,
+                  val reject: reject)
+
 data class Resquest(val title:String)
+
 data class Self(val href:String)
-data class request( val created_at:String,val title:String,val _embedded: _embedded)
-data class _embedded(val request: request, val address: Address, val user: User,val info:List<Info>,val phones:List<Phones>)
+
+data class request( val created_at:String,
+                    val title:String,
+                    @SerializedName("_embedded")
+                    val embedded: _embedded)
+
+data class _embedded(val request: request,
+                     val address: Address,
+                     val user: User,
+                     val info:List<Info>,
+                     val phones:List<Phones>)
+
 data class Phones(val number:Any)
+
 data class accept(val href: String)
+
 data class reject(val href: String)
 
-data class Address(val city:String,val neighborhood:String,val uf:String,val street:String,val geolocation:Geolocation)
-data class User(val name:String,val email:String,val _embedded: _embedded)
+data class Address(val city:String,
+                   val neighborhood:String,
+                   val uf:String,
+                   val street:String,
+                   val geolocation:Geolocation)
 
-class CreatOffers(val offers: List<Offers>, val _links: _links) {
+data class User(val name:String,
+                val email:String,
+                @SerializedName("_embedded")
+                val embedded: _embedded)
+
+class CreatOffers(val offers: List<Offers>,
+                  @SerializedName("_links")
+                  val links: _links)
+{
     fun currentOffer(index: Int): Offers {
         return offers[index]
     }
+    fun linksOffer():String{
+        return links.self.href
+    }
 }
-class CreatLeads(val leads:List<Leads>, val _links: _links)
+
+class CreatLeads(val leads:List<Leads>,
+                 @SerializedName("_links")
+                 val links: _links)
+{
+    fun linksLeads():String{
+        return links.self.href
+    }
+
+}
 
 data class Offers(val state:String,
-                  val _embedded: _embedded,
+                  @SerializedName("_embedded")
+                  val embedded: _embedded,
                   val resquest: Resquest,
-                  val _links: _links,
+                  @SerializedName("_links")
+                  val links: _links,
                   val href: String)
 {
     fun title(): String {
-        return _embedded.request.title
+        return embedded.request.title
     }
 
     fun name(): String {
-        return _embedded.request._embedded.user.name
+        return embedded.request.embedded.user.name
     }
 
     fun place(): String {
-        val address = _embedded.request._embedded.address
+        val address = embedded.request.embedded.address
         return "${address.neighborhood} - ${address.city}"
     }
 
@@ -44,25 +100,33 @@ data class Offers(val state:String,
     }
 
     fun data(): String {
-        return Factory.convertDate(_embedded.request.created_at)
+        return Factory.convertDate(embedded.request.created_at)
+    }
+
+    fun links(): String {
+        return links.self.href
     }
 }
 
-data class Leads(val created_at:String,val _embedded: _embedded,val resquest: Resquest,
-                 val _links: _links,
+data class Leads(val created_at:String,
+                 @SerializedName("_embedded")
+                 val embedded: _embedded,
+                 val resquest: Resquest,
+                 @SerializedName("_links")
+                 val links: _links,
                  val href: String)
 {
 
     fun title(): String {
-        return _embedded.request.title
+        return embedded.request.title
     }
 
     fun name(): String {
-        return _embedded.user.name
+        return embedded.user.name
     }
 
     fun place(): String {
-        val address = _embedded.address
+        val address = embedded.address
         return "${address.neighborhood} - ${address.city}"
     }
 
@@ -71,24 +135,29 @@ data class Leads(val created_at:String,val _embedded: _embedded,val resquest: Re
     }
 }
 
-data class PageNext(val distance: String, val lead_price: String, val title: String,
-                    val _embedded: _embedded, val _links: _links)
+data class PageNext(val distance: String,
+                    val lead_price: String,
+                    val title: String,
+                    @SerializedName("_embedded")
+                    val embedded: _embedded,
+                    @SerializedName("_links")
+                    val links: _links)
 {
     fun title(): String {
         return title
     }
 
     fun name(): String {
-        return _embedded.user.name
+        return embedded.user.name
     }
 
     fun place(): String {
-        val address = _embedded.address
+        val address = embedded.address
         return "${address.neighborhood} - ${address.city}"
     }
 
     fun email(): String {
-        return _embedded.user.email
+        return embedded.user.email
     }
 
     fun distance(): String {
@@ -96,20 +165,21 @@ data class PageNext(val distance: String, val lead_price: String, val title: Str
     }
 
     fun number(): String {
-        return _embedded.user._embedded.phones[0].number.toString()
+        return embedded.user.embedded.phones[0].number.toString()
     }
 
     fun latitude(): Double {
-        return _embedded.address.geolocation.latitude
+        return embedded.address.geolocation.latitude
     }
 
     fun longitude(): Double {
-        return _embedded.address.geolocation.longitude
+        return embedded.address.geolocation.longitude
     }
 
 }
 
-data class Info(val label: String, val value: Any)
+data class Info(val label: String,
+                val value: Any)
 {
     fun title(): String {
         return label
@@ -121,3 +191,4 @@ data class Info(val label: String, val value: Any)
 }
 
 data class Geolocation(val latitude:Double,val longitude:Double)
+//@SerializedName("custom_naming")

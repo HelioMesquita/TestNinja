@@ -61,7 +61,7 @@ class ParseTest : RequestCallBack{
                 "          }\n" +
                 "        }\n" +
                 "      },\n" +
-                "      \"_links\": {\n" +
+                "      \"links\": {\n" +
                 "        \"self\": {\n" +
                 "          \"href\": \"https://testemobile.getninjas.com.br/offer-1\"\n" +
                 "        }\n" +
@@ -82,22 +82,22 @@ class ParseTest : RequestCallBack{
 
     @Test
     fun leadsTrueTrue(){
-        assertEquals("http://testemobile.getninjas.com.br/leads",startLinks._links.leads.href)
+        assertEquals("http://testemobile.getninjas.com.br/leads",startLinks.links.leads.href)
     }
 
     @Test
     fun leadsFalseTrue(){
-        assertNotEquals("http://testemobile.getninjas.com.br/leaads",startLinks._links.leads.href)
+        assertNotEquals("http://testemobile.getninjas.com.br/leaads",startLinks.links.leads.href)
     }
 
     @Test
     fun offersTrueTrue(){
-        assertEquals("http://testemobile.getninjas.com.br/offers",startLinks._links.offers.href)
+        assertEquals("http://testemobile.getninjas.com.br/offers",startLinks.links.offers.href)
     }
 
     @Test
     fun offersFalseTrue(){
-        assertNotEquals("http://testemobile.getninjas.com.br/offerss",startLinks._links.offers.href)
+        assertNotEquals("http://testemobile.getninjas.com.br/offerss",startLinks.links.offers.href)
     }
 
     @Test

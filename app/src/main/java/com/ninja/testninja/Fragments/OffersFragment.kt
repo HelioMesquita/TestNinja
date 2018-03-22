@@ -21,9 +21,9 @@ import kotlinx.android.synthetic.main.fragment_offers.view.*
 
 
 class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
-    override fun configRefresh() {
-        view?.swipeOffers?.setOnRefreshListener(this)
-        view?.swipeOffers?.setColorSchemeResources(R.color.colorBlueGet)
+    override fun configRefresh(view: View) {
+        view.swipeOffers!!.setOnRefreshListener(this)
+        view.swipeOffers!!.setColorSchemeResources(R.color.colorBlueGet)
     }
 
     override fun testRefresh() {
@@ -64,7 +64,7 @@ class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_offers, container, false)
 
-        configRefresh()
+        configRefresh(view)
 
         return view
     }

@@ -1,13 +1,11 @@
 package com.ninja.testninja.Adapters
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Activitys.NextLeadsActivity
-import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.CreatLeads
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
@@ -44,7 +42,7 @@ class CustomViewHolderLeads(val view: View): RecyclerView.ViewHolder(view){
     }
 
     fun nextView(){
-        Singleton.leadsNextLinks = Singleton.leads.leads[adapterPosition]._links.self.href
+        Singleton.leadsNextLinks = Singleton.leads.leads[adapterPosition].links.self.href
         view.context.startActivity(Intent(view.context, NextLeadsActivity::class.java))
     }
 

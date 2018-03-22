@@ -52,7 +52,7 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
         }
 
         buttonAceitar.setOnClickListener {
-            Singleton.leadsNextLinks = Singleton.offersNextLinks._links.accept.href
+            Singleton.leadsNextLinks = Singleton.offersNextLinks.links.accept.href
             startActivity(Intent(this,NextLeadsActivity::class.java))
             finish()
         }

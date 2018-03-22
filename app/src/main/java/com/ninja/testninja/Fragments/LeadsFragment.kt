@@ -20,9 +20,9 @@ import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
 class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
-    override fun configRefresh() {
-        view?.swipeLeads?.setOnRefreshListener(this)
-        view?.swipeLeads?.setColorSchemeResources(R.color.colorBlueGet)
+    override fun configRefresh(view: View) {
+        view.swipeLeads!!.setOnRefreshListener(this)
+        view.swipeLeads!!.setColorSchemeResources(R.color.colorBlueGet)
     }
 
     override fun testRefresh() {
@@ -64,7 +64,7 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_leads, container, false)
 
-        configRefresh()
+        configRefresh(view)
 
         return view
     }
