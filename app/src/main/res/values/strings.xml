@@ -20,4 +20,6 @@
     <string name="aceitar">ACEITAR</string>
     <string name="title_activity_next_leads">NextLeadsActivity</string>
     <string name="clienteNext">Fale com o cliente o quanto antes!</string>
+    <string name="ligar">Ligar</string>
+    <string name="what">WHATSAPP</string>
 </resources>

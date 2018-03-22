@@ -4,10 +4,17 @@
     android:layout_height="match_parent"
     tools:context="com.ninja.testninja.Fragments.OffersFragment">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/RecyclerViewOffers"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeOffers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBlueGet"/>
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecyclerViewOffers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlueGet" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

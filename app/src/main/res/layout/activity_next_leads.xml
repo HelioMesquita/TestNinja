@@ -14,17 +14,29 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonRecusar"
+            android:id="@+id/buttonLigar"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:text="@string/recusar" />
+            android:drawableLeft="@drawable/ic_call"
+            android:drawableStart="@drawable/ic_call"
+            android:paddingLeft="45dp"
+            android:paddingStart="4.dp"
+            android:text="@string/ligar"
+            android:textColor="@color/colorBlueGet"
+            android:textStyle="bold" />
 
         <Button
             android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:background="@color/green"
-            android:text="@string/aceitar" />
+            android:background="@color/white"
+            android:text="@string/what"
+            android:textColor="@color/colorBlueGet"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_chat"
+            android:drawableStart="@drawable/ic_chat"
+            android:paddingLeft="40dp"
+            android:paddingStart="40dp"/>
     </LinearLayout>
 
     <ScrollView

@@ -3,7 +3,9 @@ package com.ninja.testninja.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +20,15 @@ import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers.view.*
 
 
-class OffersFragment : Fragment(), StarView, RequestCallBack {
+class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
+    override fun onRefresh() {
+        Log.i("teste",Singleton.offers._links.self.href)
+        WebClient.responseOffersRefresh(Singleton.offers, this)
+    }
+
     override fun onSuccess(obj: Any) {
         popularRecyclerView(obj)
+
     }
 
     override fun onFail() {
@@ -29,12 +37,15 @@ class OffersFragment : Fragment(), StarView, RequestCallBack {
 
     override fun popularRecyclerView(obj: Any) {
         Singleton.offers = obj as CreatOffers
-        if(activity !=null){
-            activity.runOnUiThread {
-                view!!.RecyclerViewOffers.layoutManager = LinearLayoutManager(context)
-                view!!.RecyclerViewOffers.adapter = OffersAdapter(obj as CreatOffers)
+
+        activity.runOnUiThread {
+            view!!.RecyclerViewOffers.layoutManager = LinearLayoutManager(context)
+            view!!.RecyclerViewOffers.adapter = OffersAdapter(obj as CreatOffers)
+            if (view?.swipeOffers!!.isRefreshing && view?.swipeOffers!=null){
+                view?.swipeOffers!!.isRefreshing = false
             }
         }
+
     }
 
     override fun startRequestView(obj: Any) {
@@ -45,6 +56,9 @@ class OffersFragment : Fragment(), StarView, RequestCallBack {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_offers, container, false)
+
+        view.swipeOffers.setOnRefreshListener(this)
+        view.swipeOffers.setColorSchemeResources(R.color.colorBlueGet)
 
         return view
     }

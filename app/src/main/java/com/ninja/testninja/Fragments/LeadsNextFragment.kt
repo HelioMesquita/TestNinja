@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
-import com.ninja.testninja.Interfaces.FragmentsPopular
+import com.ninja.testninja.Interfaces.PresentationFragment
 import com.ninja.testninja.Others.PageNext
 
 import com.ninja.testninja.R
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_offers_next.*
 import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
-class LeadsNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
+class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
     lateinit var mMap:GoogleMap
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap

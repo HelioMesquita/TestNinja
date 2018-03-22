@@ -1,5 +1,6 @@
 package com.ninja.testninja.Others
 
+import android.util.Log
 import com.ninja.testninja.Interfaces.RequestCallBack
 import okhttp3.*
 import java.io.IOException
@@ -42,6 +43,38 @@ class WebClient {
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseLeads(response!!.body()!!.string()!!, delegate)
+
+                        }
+
+                        override fun onFailure(call: Call?, e: IOException?) {
+                            delegate.onFail()
+                        }
+                    })
+        }
+
+        fun responseLeadsRefresh(obj: CreatLeads, delegate: RequestCallBack) {
+            OkHttpClient()
+                    .newCall(Request.Builder()
+                            .url(obj._links.self.href)
+                            .build()).enqueue(object : Callback {
+                        override fun onResponse(call: Call?, response: Response?) {
+                            Parse.parseLeads(response!!.body()!!.string()!!, delegate)
+
+                        }
+
+                        override fun onFailure(call: Call?, e: IOException?) {
+                            delegate.onFail()
+                        }
+                    })
+        }
+
+        fun responseOffersRefresh(obj: CreatOffers, delegate: RequestCallBack) {
+            OkHttpClient()
+                    .newCall(Request.Builder()
+                            .url(obj._links.self.href)
+                            .build()).enqueue(object : Callback {
+                        override fun onResponse(call: Call?, response: Response?) {
+                            Parse.parseOffers(response!!.body()!!.string()!!, delegate)
 
                         }
 

@@ -13,17 +13,15 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.ninja.testninja.Adapters.NextPageAdapter
-import com.ninja.testninja.Interfaces.FragmentsPopular
+import com.ninja.testninja.Interfaces.PresentationFragment
 import com.ninja.testninja.Others.PageNext
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers_next.*
 import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
-class OffersNextFragment : Fragment(), OnMapReadyCallback, FragmentsPopular {
+class OffersNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
     lateinit var mMap:GoogleMap
     override fun popularFragment(obj: Any) {
         if(activity !=null) {
