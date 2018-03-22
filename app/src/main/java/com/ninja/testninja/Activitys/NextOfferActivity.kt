@@ -5,17 +5,30 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.ninja.testninja.Fragments.OffersNextFragment
+import com.ninja.testninja.Interfaces.ManageFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
+import com.ninja.testninja.Others.PageNext
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_next_offer.*
 
 
-class NextOfferActivity : AppCompatActivity(), RequestCallBack {
+class NextOfferActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
+    override fun title(title:String) {
+        runOnUiThread {
+            supportActionBar!!.title = title
+        }
+    }
+
+    override fun commit() {
+        supportFragmentManager.beginTransaction()
+                .add(R.id.mainFragment, offersNextFragment).commit()
+    }
+
     override fun onSuccess(obj: Any) {
         offersNextFragment.popularFragment(obj)
-
+        title((obj as PageNext).title)
     }
 
     override fun onFail() {
@@ -28,14 +41,9 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
         setContentView(R.layout.activity_next_offer)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.title = "Oferta"
-
-        val fm = supportFragmentManager
-        val ft = fm.beginTransaction()
-
         offersNextFragment = OffersNextFragment()
-        ft.add(R.id.mainFragment, offersNextFragment)
-        ft.commit()
+
+        commit()
 
         WebClient.responseNextOffers(Singleton.offersNext, this)
 
@@ -48,7 +56,6 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
             startActivity(Intent(this,NextLeadsActivity::class.java))
             finish()
         }
-
 
     }
 

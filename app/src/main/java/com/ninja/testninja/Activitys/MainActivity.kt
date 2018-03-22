@@ -13,6 +13,7 @@ import com.ninja.testninja.Others.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class MainActivity : AppCompatActivity(), RequestCallBack {
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
 
         val a = SectionsPageAdapter(supportFragmentManager)
@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         adapter.addFragment(offersFragment, "DISPONIVEL")
         adapter.addFragment(leadsFragment, "Aceitos")
         viewPager.adapter = adapter
+        //tabs.getTabAt(0)!!.setIcon(R.drawable.ic_check)
+        //tabs.getTabAt(1)!!.setIcon(R.drawable.ic_check)
     }
 
     override fun onRestart() {

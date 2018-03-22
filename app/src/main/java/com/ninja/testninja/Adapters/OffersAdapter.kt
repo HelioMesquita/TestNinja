@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Others.CreatOffers
 import com.ninja.testninja.Activitys.NextOfferActivity
-import com.ninja.testninja.Others.ConvertDate
+import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.R
 import com.ninja.testninja.Others.Singleton
 import kotlinx.android.synthetic.main.custom_cell_offer.view.*
@@ -26,22 +26,17 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolderOffers?, position: Int) {
-        val test = creatOffers.offers.get(position)
+        val offers = Factory.creatTextOffers(creatOffers.offers.get(position))
 
-        holder?.view?.textView_title?.text= test._embedded.request.title
-        holder?.view?.textView_name?.text= test._embedded.request._embedded.user.name
-        holder?.view?.textView_lugar?.text= test._embedded.request._embedded.address.neighborhood +
-                " - " +test._embedded.request._embedded.address.city
-        if(test.state == "unread"){
+        holder?.view?.textView_title?.text= offers.title
+        holder?.view?.textView_name?.text= offers.name
+        holder?.view?.textView_lugar?.text= offers.place
+        if(offers.state == "unread"){
             holder?.view?.imageViewPessoa?.setImageResource(R.drawable.iconipessoacinza)
             holder?.view?.imageViewLocal?.setImageResource(R.drawable.iconilugarcinza)
         }
 
-        //holder?.view?.textViewDate?.text= ConvertDate.convet(test.created_at)
-        holder?.view?.textViewDate?.text = ConvertDate.convet(test._embedded.request.created_at)
-
-
-
+        holder?.view?.textViewDate?.text = offers.date
 
     }
 

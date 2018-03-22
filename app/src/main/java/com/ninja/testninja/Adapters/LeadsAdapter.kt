@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Activitys.NextLeadsActivity
-import com.ninja.testninja.Others.ConvertDate
+import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.CreatLeads
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
@@ -24,16 +24,13 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
         return creatLeads.leads.size
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolderLeads?, position: Int) {
-        val test = creatLeads.leads.get(position)
+        val textLeads= Factory.creatTextLeads(creatLeads.leads.get(position))
 
-        holder?.view?.textView_title?.text=test._embedded.request.title
-        holder?.view?.textView_name?.text=test._embedded.user.name
-        holder?.view?.textView_lugar?.text=test._embedded.address.neighborhood + " - " +
-                test._embedded.address.city
-
-        holder?.view?.textViewDate?.text= ConvertDate.convet(test.created_at)
+        holder?.view?.textView_title?.text=textLeads.title
+        holder?.view?.textView_name?.text=textLeads.name
+        holder?.view?.textView_lugar?.text=textLeads.place
+        holder?.view?.textViewDate?.text= textLeads.date
 
     }
 
