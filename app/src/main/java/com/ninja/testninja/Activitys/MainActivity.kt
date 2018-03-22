@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
     override fun onSuccess(obj: Any) {
         offersFragment.startRequestView(obj as StartLinks)
         leadsFragment.startRequestView(obj as StartLinks)
-        Singleton.mainLinks = obj as StartLinks
     }
 
     override fun onFail() {

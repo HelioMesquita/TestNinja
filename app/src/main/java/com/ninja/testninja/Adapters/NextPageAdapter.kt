@@ -22,10 +22,10 @@ class NextPageAdapter(val PageNext: PageNext,val layout:Int): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderNextPage?, position: Int) {
-        val textNext = Factory.creatNextText(PageNext._embedded.info.get(position))
+        val textNext = PageNext._embedded.info.get(position)
 
-        holder?.view?.textViewTitulo?.text=textNext.title
-        holder?.view?.textViewValue?.text=textNext.value
+        holder?.view?.textViewTitulo?.text = textNext.title()
+        holder?.view?.textViewValue?.text = textNext.value()
 
     }
 

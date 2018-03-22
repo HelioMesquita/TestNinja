@@ -1,7 +1,6 @@
 package com.ninja.testninja.Fragments
 
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,7 +17,6 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
-import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.PageNext
 
 import com.ninja.testninja.R
@@ -76,14 +74,13 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
     }
 
     override fun implement(obj: PageNext) {
-        val textNext = Factory.creatNext(obj)
         activity.runOnUiThread {
-            view!!.textViewTitleFragmet.text = textNext.title
-            view!!.textViewClient.text = textNext.name
-            view!!.textViewLocal.text = textNext.place
-            view!!.textViewEmail.text = textNext.email
-            view!!.textViewDistance.text = textNext.distance
-            view!!.textViewNumber.text = textNext.number
+            view!!.textViewTitleFragmet.text = obj.title()
+            view!!.textViewClient.text = obj.name()
+            view!!.textViewLocal.text = obj.place()
+            view!!.textViewEmail.text = obj.email()
+            view!!.textViewDistance.text = obj.distance()
+            view!!.textViewNumber.text = obj.number()
 
         }
     }

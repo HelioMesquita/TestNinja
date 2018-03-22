@@ -25,17 +25,17 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderOffers?, position: Int) {
-        val offers = Factory.creatTextOffers(creatOffers.offers.get(position))
+        val offers = creatOffers.offers.get(position)
 
-        holder?.view?.textView_title?.text=offers.title
-        holder?.view?.textView_name?.text=offers.name
-        holder?.view?.textView_lugar?.text=offers.place
-        if(offers.state == "unread"){
+        holder?.view?.textView_title?.text = offers.title()
+        holder?.view?.textView_name?.text = offers.name()
+        holder?.view?.textView_lugar?.text = offers.place()
+        if (offers.state() == "unread") {
             holder?.view?.imageViewPessoa?.setImageResource(R.drawable.iconipessoacinza)
             holder?.view?.imageViewLocal?.setImageResource(R.drawable.ic_location)
         }
 
-        holder?.view?.textViewDate?.text=offers.date
+        holder?.view?.textViewDate?.text = offers.data()
 
     }
 

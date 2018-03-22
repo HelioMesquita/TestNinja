@@ -87,14 +87,14 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
     }
 
     override fun implement(obj: PageNext) {
-        val textNext = Factory.creatNext(obj)
+        val textNext = obj
         activity.runOnUiThread {
-            view!!.textViewTitleFragmet.text = textNext.title
-            view!!.textViewClient.text = textNext.name
-            view!!.textViewLocal.text = textNext.place
-            view!!.textViewEmail.text = textNext.email
-            view!!.textViewDistance.text = textNext.distance
-            view!!.textViewNumber.text = textNext.number
+            view!!.textViewTitleFragmet.text = textNext.title()
+            view!!.textViewClient.text = textNext.name()
+            view!!.textViewLocal.text = textNext.place()
+            view!!.textViewEmail.text = textNext.email()
+            view!!.textViewDistance.text = textNext.distance()
+            view!!.textViewNumber.text = textNext.number()
         }
     }
 

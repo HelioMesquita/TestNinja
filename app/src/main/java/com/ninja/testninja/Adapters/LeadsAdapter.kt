@@ -25,12 +25,12 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderLeads?, position: Int) {
-        val textLeads= Factory.creatTextLeads(creatLeads.leads.get(position))
+        val textLeads = creatLeads.leads[position]
 
-        holder?.view?.textView_title?.text=textLeads.title
-        holder?.view?.textView_name?.text=textLeads.name
-        holder?.view?.textView_lugar?.text=textLeads.place
-        holder?.view?.textViewDate?.text=textLeads.date
+        holder?.view?.textView_title?.text = textLeads.title()
+        holder?.view?.textView_name?.text = textLeads.name()
+        holder?.view?.textView_lugar?.text = textLeads.place()
+        holder?.view?.textViewDate?.text = textLeads.data()
 
     }
 

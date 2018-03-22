@@ -13,24 +13,109 @@ data class reject(val href: String)
 data class Address(val city:String,val neighborhood:String,val uf:String,val street:String,val geolocation:Geolocation)
 data class User(val name:String,val email:String,val _embedded: _embedded)
 
-class CreatOffers(val offers: List<Offers>, val _links: _links)
+class CreatOffers(val offers: List<Offers>, val _links: _links) {
+    fun currentOffer(index: Int): Offers {
+        return offers[index]
+    }
+}
 class CreatLeads(val leads:List<Leads>, val _links: _links)
 
 data class Offers(val state:String,
                   val _embedded: _embedded,
                   val resquest: Resquest,
                   val _links: _links,
-                  val href:String)
+                  val href: String) {
+    fun title(): String {
+        return _embedded.request.title
+    }
+
+    fun name(): String {
+        return _embedded.request._embedded.user.name
+    }
+
+    fun place(): String {
+        val address = _embedded.request._embedded.address
+        return "${address.neighborhood} - ${address.city}"
+    }
+
+    fun state(): String {
+        return state
+    }
+
+    fun data(): String {
+        return Factory.convertDate(_embedded.request.created_at)
+    }
+}
 
 data class Leads(val created_at:String,
                  val _embedded: _embedded,
                  val resquest: Resquest,
                  val _links: _links,
-                 val href:String)
+                 val href: String) {
 
-data class PageNext(val distance:String, val lead_price:String, val title:String, val _embedded:_embedded,val _links: _links)
+    fun title(): String {
+        return _embedded.request.title
+    }
 
-data class Info(val label:String,val value: Any)
+    fun name(): String {
+        return _embedded.user.name
+    }
+
+    fun place(): String {
+        val address = _embedded.address
+        return "${address.street} - ${address.city}"
+    }
+
+    fun data(): String {
+        return Factory.convertDate(created_at)
+    }
+}
+
+data class PageNext(val distance: String, val lead_price: String, val title: String, val _embedded: _embedded, val _links: _links) {
+    fun title(): String {
+        return title
+    }
+
+    fun name(): String {
+        return _embedded.user.name
+    }
+
+    fun place(): String {
+        val address = _embedded.address
+        return "${address.neighborhood} - ${address.city}"
+    }
+
+    fun email(): String {
+        return _embedded.user.email
+    }
+
+    fun distance(): String {
+        return Factory.convertDistance(distance)
+    }
+
+    fun number(): String {
+        return _embedded.user._embedded.phones[0].number.toString()
+    }
+
+    /**
+     * view!!.textViewTitleFragmet.text = textNext.title
+    view!!.textViewClient.text = textNext.name
+    view!!.textViewLocal.text = textNext.place
+    view!!.textViewEmail.text = textNext.email
+    view!!.textViewDistance.text = textNext.distance
+    view!!.textViewNumber.text = textNext.number
+     */
+}
+
+data class Info(val label: String, val value: Any) {
+    fun title(): String {
+        return label
+    }
+
+    fun value(): String {
+        return Factory.convertList(value.toString())
+    }
+}
 
 data class Geolocation(val latitude:Double,val longitude:Double)
 
