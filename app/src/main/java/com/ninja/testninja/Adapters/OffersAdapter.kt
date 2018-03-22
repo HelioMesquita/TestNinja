@@ -24,7 +24,6 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
         return creatOffers.offers.size
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolderOffers?, position: Int) {
         val offers = Factory.creatTextOffers(creatOffers.offers.get(position))
 
