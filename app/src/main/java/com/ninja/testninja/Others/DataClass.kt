@@ -24,7 +24,8 @@ data class Offers(val state:String,
                   val _embedded: _embedded,
                   val resquest: Resquest,
                   val _links: _links,
-                  val href: String) {
+                  val href: String)
+{
     fun title(): String {
         return _embedded.request.title
     }
@@ -47,11 +48,10 @@ data class Offers(val state:String,
     }
 }
 
-data class Leads(val created_at:String,
-                 val _embedded: _embedded,
-                 val resquest: Resquest,
+data class Leads(val created_at:String,val _embedded: _embedded,val resquest: Resquest,
                  val _links: _links,
-                 val href: String) {
+                 val href: String)
+{
 
     fun title(): String {
         return _embedded.request.title
@@ -63,7 +63,7 @@ data class Leads(val created_at:String,
 
     fun place(): String {
         val address = _embedded.address
-        return "${address.street} - ${address.city}"
+        return "${address.neighborhood} - ${address.city}"
     }
 
     fun data(): String {
@@ -71,7 +71,9 @@ data class Leads(val created_at:String,
     }
 }
 
-data class PageNext(val distance: String, val lead_price: String, val title: String, val _embedded: _embedded, val _links: _links) {
+data class PageNext(val distance: String, val lead_price: String, val title: String,
+                    val _embedded: _embedded, val _links: _links)
+{
     fun title(): String {
         return title
     }
@@ -97,17 +99,18 @@ data class PageNext(val distance: String, val lead_price: String, val title: Str
         return _embedded.user._embedded.phones[0].number.toString()
     }
 
-    /**
-     * view!!.textViewTitleFragmet.text = textNext.title
-    view!!.textViewClient.text = textNext.name
-    view!!.textViewLocal.text = textNext.place
-    view!!.textViewEmail.text = textNext.email
-    view!!.textViewDistance.text = textNext.distance
-    view!!.textViewNumber.text = textNext.number
-     */
+    fun latitude(): Double {
+        return _embedded.address.geolocation.latitude
+    }
+
+    fun longitude(): Double {
+        return _embedded.address.geolocation.longitude
+    }
+
 }
 
-data class Info(val label: String, val value: Any) {
+data class Info(val label: String, val value: Any)
+{
     fun title(): String {
         return label
     }
@@ -118,7 +121,3 @@ data class Info(val label: String, val value: Any) {
 }
 
 data class Geolocation(val latitude:Double,val longitude:Double)
-
-data class TextAdapter(val title:String, val name:String, val place:String, val date:String,val state: String)
-data class TextNextAdapter(val title: String, val value:String)
-data class TextNext(val title:String,val name:String,val place:String, val email:String,val distance:String,val number:String)

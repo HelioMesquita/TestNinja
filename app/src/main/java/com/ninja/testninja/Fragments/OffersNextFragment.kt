@@ -1,7 +1,6 @@
 package com.ninja.testninja.Fragments
 
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,7 +14,6 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
-import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.PageNext
 import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
@@ -39,11 +37,9 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
     override fun moviMap(obj: PageNext) {
         activity.runOnUiThread {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
-                    .target(LatLng(obj._embedded.address.geolocation.latitude
-                            ,obj._embedded.address.geolocation.longitude))
+                    .target(LatLng(obj.latitude(),obj.longitude()))
                     .zoom(16F).bearing(0F).build()))
-            mMap.addCircle(CircleOptions().center(LatLng(obj._embedded.address.geolocation.latitude
-                    ,obj._embedded.address.geolocation.longitude))
+            mMap.addCircle(CircleOptions().center(LatLng(obj.latitude(),obj.longitude()))
                     .radius(150.0).fillColor(0xA3D4E4).strokeColor(Color.BLUE))
         }
 
@@ -87,14 +83,13 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
     }
 
     override fun implement(obj: PageNext) {
-        val textNext = obj
         activity.runOnUiThread {
-            view!!.textViewTitleFragmet.text = textNext.title()
-            view!!.textViewClient.text = textNext.name()
-            view!!.textViewLocal.text = textNext.place()
-            view!!.textViewEmail.text = textNext.email()
-            view!!.textViewDistance.text = textNext.distance()
-            view!!.textViewNumber.text = textNext.number()
+            view!!.textViewTitleFragmet.text = obj.title()
+            view!!.textViewClient.text = obj.name()
+            view!!.textViewLocal.text = obj.place()
+            view!!.textViewEmail.text = obj.email()
+            view!!.textViewDistance.text = obj.distance()
+            view!!.textViewNumber.text = obj.number()
         }
     }
 

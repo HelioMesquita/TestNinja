@@ -39,12 +39,10 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
 
     override fun moviMap(obj: PageNext) {
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
-                .target(LatLng(obj._embedded.address.geolocation.latitude
-                        ,obj._embedded.address.geolocation.longitude))
+                .target(LatLng(obj.latitude(),obj.longitude()))
                 .zoom(16F).bearing(0F).build()))
-        mMap.addCircle(CircleOptions().center(LatLng(obj._embedded.address.geolocation.latitude
-                ,obj._embedded.address.geolocation.longitude)).radius(150.0)
-                .fillColor(0xA3D4E4).strokeColor(Color.BLUE))
+        mMap.addCircle(CircleOptions().center(LatLng(obj.latitude(),obj.longitude()))
+                .radius(150.0).fillColor(0xA3D4E4).strokeColor(Color.BLUE))
     }
 
     override fun popularFragment(obj: Any) {
