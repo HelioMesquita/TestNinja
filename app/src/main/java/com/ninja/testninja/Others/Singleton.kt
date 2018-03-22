@@ -6,4 +6,5 @@ object Singleton {
     lateinit var offersNext: Offers
     lateinit var leads: CreatLeads
     lateinit var leadsNextLinks:String
+    lateinit var offersNextLinks: PageNext
 }

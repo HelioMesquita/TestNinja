@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
 import com.ninja.testninja.Others.PageNext
+import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers_next.*
 import kotlinx.android.synthetic.main.fragment_offers_next.view.*
@@ -32,6 +33,7 @@ class OffersNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
     }
 
     override fun popularRecyclerView(obj: Any) {
+        Singleton.offersNextLinks = obj as PageNext
         activity.runOnUiThread {
             view!!.recyclerView.layoutManager = LinearLayoutManager(context)
             view!!.recyclerView.recyclerView.adapter =

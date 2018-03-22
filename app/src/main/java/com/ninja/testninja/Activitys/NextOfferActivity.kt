@@ -44,7 +44,7 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack {
         }
 
         buttonAceitar.setOnClickListener {
-            Singleton.leadsNextLinks = Singleton.offersNext._links.self.href
+            Singleton.leadsNextLinks = Singleton.offersNextLinks._links.accept.href
             startActivity(Intent(this,NextLeadsActivity::class.java))
             finish()
         }
