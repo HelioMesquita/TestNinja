@@ -17,6 +17,10 @@ class Factory{
             return "$neighborhood - $city"
         }
 
+        fun convertDistance(value: String):String{
+            return "a " + (value.toInt()/1000).toString() + " km de voce"
+        }
+
         fun creatTextLeads(leads: Leads): TextAdapter {
             return TextAdapter(leads._embedded.request.title,leads._embedded.user.name,
                     Factory.convertCity(leads._embedded.address.neighborhood,
@@ -30,6 +34,22 @@ class Factory{
                             offers._embedded.request._embedded.address.city),
                     convertDate(offers._embedded.request.created_at),offers.state)
         }
+
+        fun creatNextText(info: Info): TextNextAdapter {
+            return TextNextAdapter(info.label, convertList(info.value.toString()))
+        }
+
+        fun convertList(value:String):String{
+            return value.replace("[","").replace("]","")
+        }
+
+        fun creatNext(pageNext: PageNext) : TextNext{
+            return TextNext(pageNext.title,pageNext._embedded.user.name,
+                    convertCity(pageNext._embedded.address.neighborhood,pageNext._embedded.address.city),
+                    pageNext._embedded.user.email, convertDistance(pageNext.distance)
+                    ,convertList(pageNext._embedded.user._embedded.phones[0].number.toString()))
+        }
+
 
     }
 }

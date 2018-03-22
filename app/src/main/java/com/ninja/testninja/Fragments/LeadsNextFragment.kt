@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
+import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.PageNext
 
 import com.ninja.testninja.R
@@ -26,18 +27,33 @@ import kotlinx.android.synthetic.main.fragment_offers_next.view.*
 
 
 class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
-    lateinit var mMap:GoogleMap
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        MapsInitializer.initialize(view?.context)
-        googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
+    override fun implementMap(obj: PageNext) {
+        Thread{
+            if(obj!=null){
+                activity.runOnUiThread {
+                    moviMap(obj)
+                }
+            }else{
+                implementMap(obj)
+            }
+        }.start()
+    }
+
+    override fun moviMap(obj: PageNext) {
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
+                .target(LatLng(obj._embedded.address.geolocation.latitude
+                        ,obj._embedded.address.geolocation.longitude))
+                .zoom(16F).bearing(0F).build()))
+        mMap.addCircle(CircleOptions().center(LatLng(obj._embedded.address.geolocation.latitude
+                ,obj._embedded.address.geolocation.longitude)).radius(150.0)
+                .fillColor(0xA3D4E4).strokeColor(Color.BLUE))
     }
 
     override fun popularFragment(obj: Any) {
         if(activity !=null) {
             implement(obj as PageNext)
             popularRecyclerView(obj)
-            logalMap(obj as PageNext)
+            implementMap(obj as PageNext)
         }
     }
 
@@ -55,28 +71,19 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
         val view = inflater!!.inflate(R.layout.fragment_leads_next, container, false)
 
 
-
         return view
     }
 
-    @SuppressLint("SetTextI18n")
     override fun implement(obj: PageNext) {
+        val textNext = Factory.creatNext(obj)
         activity.runOnUiThread {
-            view!!.textViewTitleFragmet.text = obj.title
-            view!!.textViewClient.text = obj._embedded.user.name
-            view!!.textViewLocal.text = obj._embedded.address.neighborhood +
-                    obj._embedded.address.city
+            view!!.textViewTitleFragmet.text = textNext.title
+            view!!.textViewClient.text = textNext.name
+            view!!.textViewLocal.text = textNext.place
+            view!!.textViewEmail.text = textNext.email
+            view!!.textViewDistance.text = textNext.distance
+            view!!.textViewNumber.text = textNext.number
 
-            view!!.textViewEmail.text = obj._embedded.user.email
-
-            val dist = (obj.distance.toInt())/1000
-
-            view!!.textViewDistance.text = "a $dist km de voce"
-
-            var phone = obj._embedded.user._embedded.phones[0].number.toString()
-            phone = phone.replace("[", "")
-            phone = phone.replace("]", "")
-            view!!.textViewNumber.text = phone
         }
     }
 
@@ -91,29 +98,12 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
 
     }
 
-    fun logalMap(obj: PageNext){
-        //mMap.addCircle(MarkerOptions().position(LatLng(obj._embedded.address.geolocation.latitude,obj._embedded.address.geolocation.longitude)))
-        Thread{
-            if(obj!=null){
-                activity.runOnUiThread {
-                    val cam = CameraPosition.builder()
-                            .target(LatLng(obj._embedded.address.geolocation.latitude
-                                    ,obj._embedded.address.geolocation.longitude))
-                            .zoom(16F).bearing(0F).build()
-
-                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cam))
-
-
-                    mMap.addCircle(CircleOptions().center(LatLng(obj._embedded.address.geolocation.latitude
-                            ,obj._embedded.address.geolocation.longitude)).radius(150.0).fillColor(0xA3D4E4).strokeColor(Color.BLUE))
-                    //MarkerOptions().position(LatLng(obj._embedded.address.geolocation.latitude,obj._embedded.address.geolocation.longitude)))
-                }
-            }else{
-                logalMap(obj)
-            }
-        }.start()
-
-
+    lateinit var mMap:GoogleMap
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        MapsInitializer.initialize(view?.context)
+        googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 
-}// Required empty public constructor
+
+}

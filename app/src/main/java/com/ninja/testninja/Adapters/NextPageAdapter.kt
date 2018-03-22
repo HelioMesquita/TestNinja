@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.Others.PageNext
-import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.custom_cell_next_offer.view.*
 
 
@@ -22,16 +22,10 @@ class NextPageAdapter(val PageNext: PageNext,val layout:Int): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderNextPage?, position: Int) {
-        val text = PageNext._embedded.info.get(position)
+        val textNext = Factory.creatNextText(PageNext._embedded.info.get(position))
 
-        holder?.view?.textViewTitulo?.text=text.label
-
-        var textString = text.value.toString()
-
-        textString=textString.replace("[","")
-        textString=textString.replace("]","")
-
-        holder?.view?.textViewValue?.text=textString
+        holder?.view?.textViewTitulo?.text=textNext.title
+        holder?.view?.textViewValue?.text=textNext.value
 
     }
 

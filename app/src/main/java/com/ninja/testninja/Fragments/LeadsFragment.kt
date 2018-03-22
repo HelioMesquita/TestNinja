@@ -58,7 +58,6 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
         view.swipeLeads.setOnRefreshListener(this)
         view.swipeLeads.setColorSchemeResources(R.color.colorBlueGet)
 
-
         return view
     }
 

@@ -30,7 +30,7 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
         holder?.view?.textView_title?.text=textLeads.title
         holder?.view?.textView_name?.text=textLeads.name
         holder?.view?.textView_lugar?.text=textLeads.place
-        holder?.view?.textViewDate?.text= textLeads.date
+        holder?.view?.textViewDate?.text=textLeads.date
 
     }
 

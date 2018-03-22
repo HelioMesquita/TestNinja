@@ -35,3 +35,5 @@ data class Info(val label:String,val value: Any)
 data class Geolocation(val latitude:Double,val longitude:Double)
 
 data class TextAdapter(val title:String, val name:String, val place:String, val date:String,val state: String)
+data class TextNextAdapter(val title: String, val value:String)
+data class TextNext(val title:String,val name:String,val place:String, val email:String,val distance:String,val number:String)
