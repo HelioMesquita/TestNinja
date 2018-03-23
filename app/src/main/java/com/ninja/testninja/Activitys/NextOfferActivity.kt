@@ -8,7 +8,6 @@ import com.ninja.testninja.Fragments.OffersNextFragment
 import com.ninja.testninja.Interfaces.ManageFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Others.PageNext
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_next_offer.*
@@ -28,13 +27,15 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
 
     override fun onSuccess(obj: Any) {
         offersNextFragment.popularFragment(obj)
-        title((obj as PageNext).title)
+        title((obj as PageNext).title())
+        pageNext = obj as PageNext
     }
 
     override fun onFail() {
 
     }
 
+    lateinit var pageNext: PageNext
     lateinit var offersNextFragment: OffersNextFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +46,15 @@ class NextOfferActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
 
         commit()
 
-        WebClient.responseNextOffers(Singleton.offersNext, this)
+        WebClient.responseNextOffers(intent.getStringExtra("links"), this)
 
         buttonRecusar.setOnClickListener {
             finish()
         }
 
         buttonAceitar.setOnClickListener {
-            Singleton.leadsNextLinks = Singleton.offersNextLinks.links.accept.href
-            startActivity(Intent(this,NextLeadsActivity::class.java))
+            startActivity(Intent(this,NextLeadsActivity::class.java)
+                    .putExtra("links",pageNext.accept()))
             finish()
         }
 

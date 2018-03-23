@@ -12,7 +12,6 @@ import com.ninja.testninja.Adapters.LeadsAdapter
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Interfaces.StarView
 import com.ninja.testninja.Others.CreatLeads
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
@@ -32,12 +31,11 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
     }
 
     override fun onRefresh() {
-        WebClient.responseLeadsRefresh(Singleton.leads, this)
+        WebClient.responseLeadsRefresh(creatLeads.linksLeads(), this)
     }
 
     override fun popularRecyclerView(obj: Any) {
-        Singleton.leads = obj as CreatLeads
-
+        creatLeads = obj as CreatLeads
         activity.runOnUiThread {
             view!!.RecylerViewLeads.layoutManager = LinearLayoutManager(context)
             view!!.RecylerViewLeads.adapter = LeadsAdapter(obj as CreatLeads)
@@ -56,10 +54,10 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
     }
 
     override fun startRequestView(obj: Any) {
-        WebClient.responseLeads(obj as StartLinks, this)
+        WebClient.responseLeads((obj as StartLinks).linksLeads(), this)
     }
 
-
+    lateinit var creatLeads: CreatLeads
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_leads, container, false)

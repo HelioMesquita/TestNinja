@@ -133,6 +133,12 @@ data class Leads(val created_at:String,
     fun data(): String {
         return Factory.convertDate(created_at)
     }
+
+    fun links(): String {
+        return links.self.href
+    }
+
+
 }
 
 data class PageNext(val distance: String,
@@ -174,6 +180,10 @@ data class PageNext(val distance: String,
 
     fun longitude(): Double {
         return embedded.address.geolocation.longitude
+    }
+
+    fun accept():String{
+        return links.accept.href
     }
 
 }

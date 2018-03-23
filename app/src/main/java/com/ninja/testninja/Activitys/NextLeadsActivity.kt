@@ -7,7 +7,6 @@ import com.ninja.testninja.Fragments.LeadsNextFragment
 import com.ninja.testninja.Interfaces.ManageFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Others.PageNext
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 
@@ -41,7 +40,7 @@ class NextLeadsActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
 
         commit()
 
-        WebClient.responseNextLeads(Singleton.leadsNextLinks, this)
+        WebClient.responseNextLeads(intent.getStringExtra("links"), this)
 
     }
 

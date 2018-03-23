@@ -20,10 +20,10 @@ class WebClient {
             })
         }
 
-        fun responseOffers(obj: StartLinks, delegate: RequestCallBack) {
+        fun responseOffers(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj.linksOffer())
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseOffers(response!!.body()!!.string()!!, delegate)
@@ -36,10 +36,10 @@ class WebClient {
                     })
         }
 
-        fun responseLeads(obj: StartLinks, delegate: RequestCallBack) {
+        fun responseLeads(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj.linksLeads())
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseLeads(response!!.body()!!.string()!!, delegate)
@@ -52,10 +52,10 @@ class WebClient {
                     })
         }
 
-        fun responseLeadsRefresh(obj: CreatLeads, delegate: RequestCallBack) {
+        fun responseLeadsRefresh(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj.linksLeads())
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseLeads(response!!.body()!!.string()!!, delegate)
@@ -68,10 +68,10 @@ class WebClient {
                     })
         }
 
-        fun responseOffersRefresh(obj: CreatOffers, delegate: RequestCallBack) {
+        fun responseOffersRefresh(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj.linksOffer())
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseOffers(response!!.body()!!.string()!!, delegate)
@@ -84,10 +84,10 @@ class WebClient {
                     })
         }
 
-        fun responseNextOffers(obj: Offers, delegate: RequestCallBack) {
+        fun responseNextOffers(url: String, delegate: RequestCallBack) {
             OkHttpClient()
                     .newCall(Request.Builder()
-                            .url(obj.links())
+                            .url(url)
                             .build()).enqueue(object : Callback {
                         override fun onResponse(call: Call?, response: Response?) {
                             Parse.parseNext(response!!.body()!!.string()!!, delegate)

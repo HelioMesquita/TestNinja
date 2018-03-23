@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Activitys.NextLeadsActivity
 import com.ninja.testninja.Others.CreatLeads
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.custom_cell_leads.view.*
 
@@ -15,7 +14,7 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolderLeads {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val cellForRow = layoutInflater.inflate(R.layout.custom_cell_leads,parent,false)
-        return CustomViewHolderLeads(cellForRow)
+        return CustomViewHolderLeads(cellForRow,creatLeads)
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +33,7 @@ class LeadsAdapter(val creatLeads: CreatLeads): RecyclerView.Adapter<CustomViewH
 
 }
 
-class CustomViewHolderLeads(val view: View): RecyclerView.ViewHolder(view){
+class CustomViewHolderLeads(val view: View,val creatLeads: CreatLeads): RecyclerView.ViewHolder(view){
     init {
         view.setOnClickListener {
             nextView()
@@ -42,8 +41,8 @@ class CustomViewHolderLeads(val view: View): RecyclerView.ViewHolder(view){
     }
 
     fun nextView(){
-        Singleton.leadsNextLinks = Singleton.leads.leads[adapterPosition].links.self.href
-        view.context.startActivity(Intent(view.context, NextLeadsActivity::class.java))
+        view.context.startActivity(Intent(view.context, NextLeadsActivity::class.java)
+                .putExtra("links",creatLeads.leads[adapterPosition].links()))
     }
 
 }

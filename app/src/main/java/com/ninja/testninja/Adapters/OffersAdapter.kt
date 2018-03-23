@@ -1,6 +1,5 @@
 package com.ninja.testninja.Adapters
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.ninja.testninja.Others.CreatOffers
 import com.ninja.testninja.Activitys.NextOfferActivity
-import com.ninja.testninja.Others.Factory
 import com.ninja.testninja.R
-import com.ninja.testninja.Others.Singleton
 import kotlinx.android.synthetic.main.custom_cell_offer.view.*
 
 class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomViewHolderOffers>(){
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolderOffers {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val cellForRow = layoutInflater.inflate(R.layout.custom_cell_offer,parent,false)
-        return CustomViewHolderOffers(cellForRow)
+        return CustomViewHolderOffers(cellForRow,creatOffers)
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +38,7 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
 
 }
 
-class CustomViewHolderOffers(val view: View): RecyclerView.ViewHolder(view){
+class CustomViewHolderOffers(val view: View,val creatOffers: CreatOffers): RecyclerView.ViewHolder(view){
     init {
         view.setOnClickListener {
             nextView()
@@ -49,7 +46,7 @@ class CustomViewHolderOffers(val view: View): RecyclerView.ViewHolder(view){
     }
 
     fun nextView(){
-        Singleton.offersNext = Singleton.offers.offers[adapterPosition]
-        view.context.startActivity(Intent(view.context, NextOfferActivity::class.java))
+        view.context.startActivity(Intent(view.context, NextOfferActivity::class.java)
+                .putExtra("links",creatOffers.offers[adapterPosition].links()))
     }
 }

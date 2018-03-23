@@ -8,12 +8,10 @@ import com.ninja.testninja.Adapters.SectionsPageAdapter
 import com.ninja.testninja.Fragments.LeadsFragment
 import com.ninja.testninja.Fragments.OffersFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
-import com.ninja.testninja.Others.Singleton
 import com.ninja.testninja.Others.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class MainActivity : AppCompatActivity(), RequestCallBack {
