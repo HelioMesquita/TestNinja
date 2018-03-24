@@ -10,7 +10,7 @@ import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Others.Deteil
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
-import kotlinx.android.synthetic.main.activity_next_offer.*
+import kotlinx.android.synthetic.main.activity_detail_offer.*
 
 class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
 
@@ -19,7 +19,7 @@ class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_next_offer)
+        setContentView(R.layout.activity_detail_offer)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
         offerDetailFragment = OfferDetailFragment()

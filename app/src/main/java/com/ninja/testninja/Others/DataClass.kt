@@ -20,7 +20,7 @@ data class Link(val leads: Leads,
                 val accept:accept,
                 val reject: reject)
 
-data class Request(val title:String)
+data class Requesty(val title:String)
 
 data class Self(val href:String)
 
@@ -76,7 +76,7 @@ class LeadsList(val leads:List<Leads>,
 data class Offers(val state:String,
                   @SerializedName("_embedded")
                   val embedded: _embedded,
-                  val request: Request,
+                  val requesty: Requesty,
                   @SerializedName("_links")
                   val link: Link,
                   val href: String)
@@ -110,8 +110,8 @@ data class Offers(val state:String,
 data class Leads(val created_at:String,
                  @SerializedName("_embedded")
                  val embedded: _embedded,
-                 val request: Request,
-                 @SerializedName("Link")
+                 val requesty: Requesty,
+                 @SerializedName("_links")
                  val link: Link,
                  val href: String)
 {
@@ -145,7 +145,7 @@ data class Deteil(val distance: String,
                   val title: String,
                   @SerializedName("_embedded")
                     val embedded: _embedded,
-                  @SerializedName("Link")
+                  @SerializedName("_links")
                     val link: Link)
 {
     fun title(): String {

@@ -32,7 +32,7 @@ class ParseTest : RequestCallBack{
     @Before
     fun setUp() {
         gson="{\n" +
-                "   \"Link\" : {\n" +
+                "   \"_links\" : {\n" +
                 "      \"leads\" : {\n" +
                 "         \"href\" : \"http://testemobile.getninjas.com.br/leads\"\n" +
                 "      },\n" +
@@ -46,28 +46,28 @@ class ParseTest : RequestCallBack{
 
 
         gson = "{\n" +
-                "  \"offersList\": [\n" +
+                "  \"offers\":[\n" +
                 "    {\n" +
-                "      \"state\": \"read\",\n" +
-                "      \"_embedded\": {\n" +
-                "        \"request\": {\n" +
-                "          \"created_at\": \"2016-03-04T14:47:05.000+00:00\",\n" +
-                "          \"title\": \"Buffet Completo\",\n" +
-                "          \"_embedded\": {\n" +
-                "            \"user\": {\n" +
-                "              \"name\": \"Eduardo L'Hotellier\"\n" +
+                "      \"state\":\"read\",\n" +
+                "      \"_embedded\":{\n" +
+                "        \"request\":{\n" +
+                "          \"created_at\":\"2016-03-04T14:47:05.000+00:00\",\n" +
+                "          \"title\":\"Buffet Completo\",\n" +
+                "          \"_embedded\":{\n" +
+                "            \"user\":{\n" +
+                "              \"name\":\"Eduardo L'Hotellier\"\n" +
                 "            },\n" +
-                "            \"address\": {\n" +
-                "              \"city\": \"São Paulo\",\n" +
-                "              \"neighborhood\": \"Vila Leopoldina\",\n" +
-                "              \"uf\": \"SP\"\n" +
+                "            \"address\":{\n" +
+                "              \"city\":\"São Paulo\",\n" +
+                "              \"neighborhood\":\"Vila Leopoldina\",\n" +
+                "              \"uf\":\"SP\"\n" +
                 "            }\n" +
                 "          }\n" +
                 "        }\n" +
                 "      },\n" +
-                "      \"Link\": {\n" +
-                "        \"self\": {\n" +
-                "          \"href\": \"https://testemobile.getninjas.com.br/offer-1\"\n" +
+                "      \"_links\":{\n" +
+                "        \"self\":{\n" +
+                "          \"href\":\"https://testemobile.getninjas.com.br/offer-1\"\n" +
                 "        }\n" +
                 "      }\n" +
                 "    }]\n" +
@@ -76,7 +76,7 @@ class ParseTest : RequestCallBack{
         Parse.parseOffers(gson,this)
 
         gson = "{\n" +
-                "  \"leadsList\":[\n" +
+                "  \"leads\":[\n" +
                 "    {\n" +
                 "      \"created_at\":\"2016-03-04T14:47:05.000+00:00\",\n" +
                 "      \"_embedded\":{\n" +
@@ -94,7 +94,7 @@ class ParseTest : RequestCallBack{
                 "          \"title\":\"Buffet Completo\"\n" +
                 "        }\n" +
                 "      },\n" +
-                "      \"Link\":{\n" +
+                "      \"_links\":{\n" +
                 "        \"self\":{\n" +
                 "          \"href\":\"https://testemobile.getninjas.com.br/lead-1\"\n" +
                 "        }\n" +
@@ -136,12 +136,12 @@ class ParseTest : RequestCallBack{
                 "      }\n" +
                 "    }\n" +
                 "  },\n" +
-                "  \"Link\":{\n" +
+                "  \"_links\":{\n" +
                 "    \"accept\":{\n" +
                 "      \"href\":\"https://testemobile.getninjas.com.br/lead-1\"\n" +
                 "    },\n" +
                 "    \"reject\":{\n" +
-                "      \"href\":\"https://testemobile.getninjas.com.br/offersList\"\n" +
+                "      \"href\":\"https://testemobile.getninjas.com.br/offers\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}"
@@ -172,12 +172,12 @@ class ParseTest : RequestCallBack{
 
     @Test
     fun leadsLinksLeads(){
-        assertEquals("http://testemobile.getninjas.com.br/leadsList",startLinks.linkLeads())
+        assertEquals("http://testemobile.getninjas.com.br/leads",startLinks.linkLeads())
     }
 
     @Test
     fun offersLinksOffer(){
-        assertEquals("http://testemobile.getninjas.com.br/offersList",startLinks.linkOffer())
+        assertEquals("http://testemobile.getninjas.com.br/offers",startLinks.linkOffer())
     }
 
     @Test
