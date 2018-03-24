@@ -4,17 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
 import com.ninja.testninja.Fragments.OfferDetailFragment
 import com.ninja.testninja.Interfaces.ManageFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
-import com.ninja.testninja.Others.Deteil
+import com.ninja.testninja.DataClass.Detail
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_detail_offer.*
 
 class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
 
-    lateinit var deteil: Deteil
+    lateinit var detail: Detail
     lateinit var offerDetailFragment: OfferDetailFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment
 
         buttonAceitar.setOnClickListener {
             startActivity(Intent(this,LeadDeteilActivity::class.java)
-                    .putExtra("link",deteil.accept()))
+                    .putExtra("link",detail.accept()))
             finish()
         }
     }
@@ -52,12 +53,12 @@ class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment
 
     override fun onSuccess(obj: Any) {
         offerDetailFragment.popularFragment(obj)
-        title((obj as Deteil).title())
-        deteil = obj as Deteil
+        title((obj as Detail).title())
+        detail = obj as Detail
     }
 
     override fun onFail() {
-
+        Toast.makeText(this, "Erro ao carregar", Toast.LENGTH_SHORT).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

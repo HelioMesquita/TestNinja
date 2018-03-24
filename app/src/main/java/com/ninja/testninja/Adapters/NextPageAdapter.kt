@@ -4,10 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ninja.testninja.Others.Deteil
+import com.ninja.testninja.DataClass.Detail
 import kotlinx.android.synthetic.main.custom_cell_detail_offer.view.*
 
-class NextPageAdapter(val Deteil: Deteil, val layout:Int): RecyclerView.Adapter<CustomViewHolderNextPage>() {
+class NextPageAdapter(val Detail: Detail, val layout:Int): RecyclerView.Adapter<CustomViewHolderNextPage>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolderNextPage {
         val layoutInflater = LayoutInflater.from(parent?.context)
@@ -16,11 +16,11 @@ class NextPageAdapter(val Deteil: Deteil, val layout:Int): RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return Deteil.embedded.info.size
+        return Detail.embedded.info.size
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderNextPage?, position: Int) {
-        val textNext = Deteil.embedded.info.get(position)
+        val textNext = Detail.embedded.info.get(position)
 
         holder?.view?.textViewTitulo?.text = textNext.title()
         holder?.view?.textViewValue?.text = textNext.value()

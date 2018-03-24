@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import com.ninja.testninja.Adapters.OffersAdapter
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Interfaces.StarView
-import com.ninja.testninja.Others.OffersList
-import com.ninja.testninja.Others.StartLinks
+import com.ninja.testninja.DataClass.OffersList
+import com.ninja.testninja.DataClass.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers.view.*

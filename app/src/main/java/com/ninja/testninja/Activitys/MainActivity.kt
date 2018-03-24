@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.ninja.testninja.Adapters.SectionsPageAdapter
 import com.ninja.testninja.Fragments.LeadsFragment
 import com.ninja.testninja.Fragments.OffersFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
-import com.ninja.testninja.Others.StartLinks
+import com.ninja.testninja.DataClass.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         toolbar.layoutParams = bar
 
         WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
-
     }
 
     override fun onSuccess(obj: Any) {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
     }
 
     override fun onFail() {
-
+        Toast.makeText(this, "Erro ao carregar", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

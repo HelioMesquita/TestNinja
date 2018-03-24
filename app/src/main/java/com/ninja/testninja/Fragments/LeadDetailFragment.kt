@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
-import com.ninja.testninja.Others.Deteil
+import com.ninja.testninja.DataClass.Detail
 
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers_deteil.*
@@ -36,7 +36,7 @@ class LeadDetailFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
         return view
     }
 
-    override fun implementMap(obj: Deteil) {
+    override fun implementMap(obj: Detail) {
         Thread{
             if(obj != null) {
                 activity.runOnUiThread {
@@ -48,7 +48,7 @@ class LeadDetailFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
         }.start()
     }
 
-    override fun moviMap(obj: Deteil) {
+    override fun moviMap(obj: Detail) {
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
                 .target(LatLng(obj.latitude(),obj.longitude()))
                 .zoom(16F).bearing(0F).build()))
@@ -58,9 +58,9 @@ class LeadDetailFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
 
     override fun popularFragment(obj: Any) {
         if(activity != null) {
-            implement(obj as Deteil)
+            implement(obj as Detail)
             popularRecyclerView(obj)
-            implementMap(obj as Deteil)
+            implementMap(obj as Detail)
         }
     }
 
@@ -68,11 +68,11 @@ class LeadDetailFragment : Fragment(), OnMapReadyCallback, PresentationFragment 
         activity.runOnUiThread {
             view!!.recyclerView.layoutManager = LinearLayoutManager(context)
             view!!.recyclerView.recyclerView.adapter =
-                    NextPageAdapter(obj as Deteil,R.layout.custom_cell_detail_leads)
+                    NextPageAdapter(obj as Detail,R.layout.custom_cell_detail_leads)
         }
     }
 
-    override fun implement(obj: Deteil) {
+    override fun implement(obj: Detail) {
         activity.runOnUiThread {
             view!!.textViewTitleFragmet.text = obj.title()
             view!!.textViewClient.text = obj.name()

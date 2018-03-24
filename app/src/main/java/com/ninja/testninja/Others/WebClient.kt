@@ -1,6 +1,5 @@
 package com.ninja.testninja.Others
 
-import android.util.Log
 import com.ninja.testninja.Interfaces.RequestCallBack
 import okhttp3.*
 import java.io.IOException

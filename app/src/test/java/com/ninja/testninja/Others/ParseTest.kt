@@ -1,5 +1,9 @@
 package com.ninja.testninja.Others
 
+import com.ninja.testninja.DataClass.Detail
+import com.ninja.testninja.DataClass.LeadsList
+import com.ninja.testninja.DataClass.OffersList
+import com.ninja.testninja.DataClass.StartLinks
 import com.ninja.testninja.Interfaces.RequestCallBack
 import org.junit.Before
 
@@ -12,7 +16,7 @@ class ParseTest : RequestCallBack{
             1 -> startLinks = obj as StartLinks
             2 -> offersList = obj as OffersList
             3 -> leadsList = obj as LeadsList
-            4 -> next = obj as Deteil
+            4 -> next = obj as Detail
         }
         cont+=1
 
@@ -26,7 +30,7 @@ class ParseTest : RequestCallBack{
     lateinit var offersList: OffersList
     lateinit var gson:String
     lateinit var leadsList: LeadsList
-    lateinit var next: Deteil
+    lateinit var next: Detail
     var cont = 1
 
     @Before
@@ -272,12 +276,12 @@ class ParseTest : RequestCallBack{
 
     @Test
     fun nextLatitude(){
-        assertEquals(-23.5304898,next.latitude(),1.0)
+        assertEquals(-23.5304898,next.latitude(),0.0)
     }
 
     @Test
     fun nextLongitude(){
-        assertEquals(-46.7261564,next.longitude(),10.0)
+        assertEquals(-46.7261564,next.longitude(),0.0)
     }
 
     @Test

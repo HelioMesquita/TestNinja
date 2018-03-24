@@ -1,11 +1,11 @@
 package com.ninja.testninja.Interfaces
 
-import com.ninja.testninja.Others.Deteil
+import com.ninja.testninja.DataClass.Detail
 
 interface PresentationFragment {
     fun popularFragment(obj: Any)
     fun popularRecyclerView(obj: Any)
-    fun implement(obj: Deteil)
-    fun implementMap(obj: Deteil)
-    fun moviMap(obj: Deteil)
+    fun implement(obj: Detail)
+    fun implementMap(obj: Detail)
+    fun moviMap(obj: Detail)
 }

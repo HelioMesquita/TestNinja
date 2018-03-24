@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ninja.testninja.Others.OffersList
+import com.ninja.testninja.DataClass.OffersList
 import com.ninja.testninja.Activitys.OfferDeteilActivity
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.custom_cell_offer.view.*

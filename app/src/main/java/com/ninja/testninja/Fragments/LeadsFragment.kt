@@ -8,12 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ninja.testninja.Adapters.LeadsAdapter
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.Interfaces.StarView
-import com.ninja.testninja.Others.LeadsList
-import com.ninja.testninja.Others.StartLinks
+import com.ninja.testninja.DataClass.LeadsList
+import com.ninja.testninja.DataClass.StartLinks
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_leads.view.*
