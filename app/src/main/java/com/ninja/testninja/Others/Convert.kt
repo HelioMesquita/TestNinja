@@ -3,7 +3,7 @@ package com.ninja.testninja.Others
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 
-class Factory{
+class Convert{
     companion object {
 
         @SuppressLint("SimpleDateFormat")

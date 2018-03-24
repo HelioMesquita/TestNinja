@@ -5,24 +5,25 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ninja.testninja.Others.CreatOffers
-import com.ninja.testninja.Activitys.NextOfferActivity
+import com.ninja.testninja.Others.OffersList
+import com.ninja.testninja.Activitys.OfferDeteilActivity
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.custom_cell_offer.view.*
 
-class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomViewHolderOffers>(){
+class OffersAdapter(val offersList: OffersList): RecyclerView.Adapter<CustomViewHolderOffers>() {
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolderOffers {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val cellForRow = layoutInflater.inflate(R.layout.custom_cell_offer,parent,false)
-        return CustomViewHolderOffers(cellForRow,creatOffers)
+        return CustomViewHolderOffers(cellForRow,offersList)
     }
 
     override fun getItemCount(): Int {
-        return creatOffers.offers.size
+        return offersList.offers.size
     }
 
     override fun onBindViewHolder(holder: CustomViewHolderOffers?, position: Int) {
-        val offers = creatOffers.offers.get(position)
+        val offers = offersList.offers.get(position)
 
         holder?.view?.textView_title?.text = offers.title()
         holder?.view?.textView_name?.text = offers.name()
@@ -33,12 +34,10 @@ class OffersAdapter(val creatOffers: CreatOffers): RecyclerView.Adapter<CustomVi
         }
 
         holder?.view?.textViewDate?.text = offers.data()
-
     }
-
 }
 
-class CustomViewHolderOffers(val view: View,val creatOffers: CreatOffers): RecyclerView.ViewHolder(view){
+class CustomViewHolderOffers(val view: View,val offersList: OffersList): RecyclerView.ViewHolder(view){
     init {
         view.setOnClickListener {
             nextView()
@@ -46,7 +45,7 @@ class CustomViewHolderOffers(val view: View,val creatOffers: CreatOffers): Recyc
     }
 
     fun nextView(){
-        view.context.startActivity(Intent(view.context, NextOfferActivity::class.java)
-                .putExtra("links",creatOffers.offers[adapterPosition].links()))
+        view.context.startActivity(Intent(view.context, OfferDeteilActivity::class.java)
+                .putExtra("link",offersList.offers[adapterPosition].link()))
     }
 }

@@ -46,11 +46,11 @@
 
         <fragment
             android:id="@+id/mainFragment"
-            android:name="com.ninja.testninja.Fragments.LeadsNextFragment"
+            android:name="com.ninja.testninja.Fragments.LeadDetailFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            tools:layout="@layout/fragment_offers_next"
+            tools:layout="@layout/fragment_offers_deteil"
             tools:layout_editor_absoluteX="-14dp"
             tools:layout_editor_absoluteY="32dp" />
 

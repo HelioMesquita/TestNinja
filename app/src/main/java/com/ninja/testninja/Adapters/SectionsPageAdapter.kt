@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import java.util.ArrayList
 
 class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
 
@@ -25,5 +26,4 @@ class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence {
         return mFragmentTitleList[position]
     }
-
 }

@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activitys.NextOfferActivity">
+        <activity android:name=".Activitys.OfferDeteilActivity">
             <meta-data
                 android:name="android.support.transition"
                 android:value=".MainActivity" />
@@ -35,7 +35,7 @@
             android:value="AIzaSyC4qOGoRYIKnh0Bx9NV6wA8up0NXprWK44" />
 
         <activity
-            android:name=".Activitys.NextLeadsActivity"
+            android:name=".Activitys.LeadDeteilActivity"
             android:label="@string/title_activity_next_leads">
             <meta-data
                 android:name="android.support.transition"

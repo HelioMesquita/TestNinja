@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.ninja.testninja.Fragments.OffersNextFragment"
+        android:name="com.ninja.testninja.Fragments.OfferDetailFragment"
         android:layout_width="346dp"
         android:layout_height="501dp"
         android:layout_marginBottom="149dp"

@@ -13,16 +13,7 @@ import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(), RequestCallBack {
-    override fun onSuccess(obj: Any) {
-        offersFragment.startRequestView(obj as StartLinks)
-        leadsFragment.startRequestView(obj as StartLinks)
-    }
-
-    override fun onFail() {
-
-    }
 
     lateinit var offersFragment: OffersFragment
     lateinit var leadsFragment: LeadsFragment
@@ -48,6 +39,15 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
 
     }
 
+    override fun onSuccess(obj: Any) {
+        offersFragment.performRequest(obj as StartLinks)
+        leadsFragment.performRequest(obj as StartLinks)
+    }
+
+    override fun onFail() {
+
+    }
+
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = SectionsPageAdapter(supportFragmentManager)
         adapter.addFragment(offersFragment, "DISPONIVEL")
@@ -56,6 +56,4 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         //tabs.getTabAt(0)!!.setIcon(R.drawable.ic_check)
         //tabs.getTabAt(1)!!.setIcon(R.drawable.ic_check)
     }
-
-
 }

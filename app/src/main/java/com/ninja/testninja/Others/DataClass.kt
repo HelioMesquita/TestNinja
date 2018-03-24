@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName
 
 data class StartLinks(
         @SerializedName("_links")
-        val links: _links)
+        val link: Link)
 {
-    fun linksLeads():String{
-        return links.leads.href
+    fun linkLeads(): String {
+        return link.leads.href
     }
-    fun linksOffer():String{
-        return links.offers.href
+    fun linkOffer(): String {
+        return link.offers.href
     }
 }
 
-data class _links(val leads: Leads,
-                  val offers: Offers,
-                  val self: Self,
-                  val accept:accept,
-                  val reject: reject)
+data class Link(val leads: Leads,
+                val offers: Offers,
+                val self: Self,
+                val accept:accept,
+                val reject: reject)
 
-data class Resquest(val title:String)
+data class Request(val title:String)
 
 data class Self(val href:String)
 
@@ -52,34 +52,33 @@ data class User(val name:String,
                 @SerializedName("_embedded")
                 val embedded: _embedded)
 
-class CreatOffers(val offers: List<Offers>,
-                  @SerializedName("_links")
-                  val links: _links)
+class OffersList(val offers: List<Offers>,
+                 @SerializedName("_links")
+                  val link: Link)
 {
     fun currentOffer(index: Int): Offers {
         return offers[index]
     }
     fun linksOffer():String{
-        return links.self.href
+        return link.self.href
     }
 }
 
-class CreatLeads(val leads:List<Leads>,
-                 @SerializedName("_links")
-                 val links: _links)
+class LeadsList(val leads:List<Leads>,
+                @SerializedName("_links")
+                 val link: Link)
 {
     fun linksLeads():String{
-        return links.self.href
+        return link.self.href
     }
-
 }
 
 data class Offers(val state:String,
                   @SerializedName("_embedded")
                   val embedded: _embedded,
-                  val resquest: Resquest,
+                  val request: Request,
                   @SerializedName("_links")
-                  val links: _links,
+                  val link: Link,
                   val href: String)
 {
     fun title(): String {
@@ -100,20 +99,20 @@ data class Offers(val state:String,
     }
 
     fun data(): String {
-        return Factory.convertDate(embedded.request.created_at)
+        return Convert.convertDate(embedded.request.created_at)
     }
 
-    fun links(): String {
-        return links.self.href
+    fun link(): String {
+        return link.self.href
     }
 }
 
 data class Leads(val created_at:String,
                  @SerializedName("_embedded")
                  val embedded: _embedded,
-                 val resquest: Resquest,
-                 @SerializedName("_links")
-                 val links: _links,
+                 val request: Request,
+                 @SerializedName("Link")
+                 val link: Link,
                  val href: String)
 {
 
@@ -131,23 +130,23 @@ data class Leads(val created_at:String,
     }
 
     fun data(): String {
-        return Factory.convertDate(created_at)
+        return Convert.convertDate(created_at)
     }
 
-    fun links(): String {
-        return links.self.href
+    fun link(): String {
+        return link.self.href
     }
 
 
 }
 
-data class PageNext(val distance: String,
-                    val lead_price: String,
-                    val title: String,
-                    @SerializedName("_embedded")
+data class Deteil(val distance: String,
+                  val lead_price: String,
+                  val title: String,
+                  @SerializedName("_embedded")
                     val embedded: _embedded,
-                    @SerializedName("_links")
-                    val links: _links)
+                  @SerializedName("Link")
+                    val link: Link)
 {
     fun title(): String {
         return title
@@ -167,7 +166,7 @@ data class PageNext(val distance: String,
     }
 
     fun distance(): String {
-        return Factory.convertDistance(distance)
+        return Convert.convertDistance(distance)
     }
 
     fun number(): String {
@@ -183,7 +182,7 @@ data class PageNext(val distance: String,
     }
 
     fun accept():String{
-        return links.accept.href
+        return link.accept.href
     }
 
 }
@@ -196,7 +195,7 @@ data class Info(val label: String,
     }
 
     fun value(): String {
-        return Factory.convertList(value.toString())
+        return Convert.convertList(value.toString())
     }
 }
 

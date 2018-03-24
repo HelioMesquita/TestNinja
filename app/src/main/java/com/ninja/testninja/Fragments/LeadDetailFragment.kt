@@ -17,27 +17,38 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.ninja.testninja.Adapters.NextPageAdapter
 import com.ninja.testninja.Interfaces.PresentationFragment
-import com.ninja.testninja.Others.PageNext
+import com.ninja.testninja.Others.Deteil
 
 import com.ninja.testninja.R
-import kotlinx.android.synthetic.main.fragment_offers_next.*
-import kotlinx.android.synthetic.main.fragment_offers_next.view.*
+import kotlinx.android.synthetic.main.fragment_offers_deteil.*
+import kotlinx.android.synthetic.main.fragment_offers_deteil.view.*
 
 
-class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
-    override fun implementMap(obj: PageNext) {
+class LeadDetailFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
+
+    lateinit var mMap: GoogleMap
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+
+        val view = inflater!!.inflate(R.layout.fragment_leads_detail, container, false)
+
+        return view
+    }
+
+    override fun implementMap(obj: Deteil) {
         Thread{
-            if(obj!=null){
+            if(obj != null) {
                 activity.runOnUiThread {
                     moviMap(obj)
                 }
-            }else{
+            } else {
                 implementMap(obj)
             }
         }.start()
     }
 
-    override fun moviMap(obj: PageNext) {
+    override fun moviMap(obj: Deteil) {
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
                 .target(LatLng(obj.latitude(),obj.longitude()))
                 .zoom(16F).bearing(0F).build()))
@@ -46,10 +57,10 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
     }
 
     override fun popularFragment(obj: Any) {
-        if(activity !=null) {
-            implement(obj as PageNext)
+        if(activity != null) {
+            implement(obj as Deteil)
             popularRecyclerView(obj)
-            implementMap(obj as PageNext)
+            implementMap(obj as Deteil)
         }
     }
 
@@ -57,21 +68,11 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
         activity.runOnUiThread {
             view!!.recyclerView.layoutManager = LinearLayoutManager(context)
             view!!.recyclerView.recyclerView.adapter =
-                    NextPageAdapter(obj as PageNext,R.layout.custom_cell_next_leads)
+                    NextPageAdapter(obj as Deteil,R.layout.custom_cell_detail_leads)
         }
     }
 
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        val view = inflater!!.inflate(R.layout.fragment_leads_next, container, false)
-
-
-        return view
-    }
-
-    override fun implement(obj: PageNext) {
+    override fun implement(obj: Deteil) {
         activity.runOnUiThread {
             view!!.textViewTitleFragmet.text = obj.title()
             view!!.textViewClient.text = obj.name()
@@ -79,27 +80,21 @@ class LeadsNextFragment : Fragment(), OnMapReadyCallback, PresentationFragment {
             view!!.textViewEmail.text = obj.email()
             view!!.textViewDistance.text = obj.distance()
             view!!.textViewNumber.text = obj.number()
-
         }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if(mapView!=null){
+        if(mapView != null) {
             mapView.onCreate(null)
             mapView.onResume()
             mapView.getMapAsync(this)
         }
-
     }
 
-    lateinit var mMap:GoogleMap
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         MapsInitializer.initialize(view?.context)
         googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
-
-
 }
