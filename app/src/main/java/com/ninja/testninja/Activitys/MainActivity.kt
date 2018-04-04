@@ -10,11 +10,12 @@ import com.ninja.testninja.Fragments.LeadsFragment
 import com.ninja.testninja.Fragments.OffersFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.DataClass.StartLinks
+import com.ninja.testninja.Interfaces.NewInterfaceTest
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), RequestCallBack {
+class MainActivity : AppCompatActivity(), NewInterfaceTest<StartLinks> {
 
     lateinit var offersFragment: OffersFragment
     lateinit var leadsFragment: LeadsFragment
@@ -36,10 +37,10 @@ class MainActivity : AppCompatActivity(), RequestCallBack {
         bar.scrollFlags = 0
         toolbar.layoutParams = bar
 
-        WebClient.requestInitial(this, "https://testemobile.getninjas.com.br/")
+        WebClient.allResponse( "https://testemobile.getninjas.com.br/",this)
     }
 
-    override fun onSuccess(obj: Any) {
+    override fun sucesso(obj: StartLinks) {
         offersFragment.performRequest(obj as StartLinks)
         leadsFragment.performRequest(obj as StartLinks)
     }
