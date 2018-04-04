@@ -18,7 +18,7 @@ import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_leads.view.*
 
 
-class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
+class LeadsFragment : Fragment(), StarView, SwipeRefreshLayout.OnRefreshListener, RequestCallBack<LeadsList>{
 
     lateinit var leadsList: LeadsList
 
@@ -43,7 +43,7 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
     }
 
     override fun onRefresh() {
-        WebClient.responseLeadsRefresh(leadsList.linksLeads(), this)
+        WebClient.allResponse(leadsList.linksLeads(), this)
     }
 
     override fun popularRecyclerView(obj: Any) {
@@ -53,8 +53,8 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
         }
     }
 
-    override fun onSuccess(obj: Any) {
-        leadsList = obj as LeadsList
+    override fun OnSuccess(obj: LeadsList) {
+        leadsList = obj
         popularRecyclerView(obj)
         isRefreshing()
     }
@@ -64,6 +64,6 @@ class LeadsFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.
     }
 
     override fun performRequest(startLinks: StartLinks) {
-        WebClient.responseLeads(startLinks.linkLeads(), this)
+        WebClient.allResponse(startLinks.linkLeads(), this)
     }
 }

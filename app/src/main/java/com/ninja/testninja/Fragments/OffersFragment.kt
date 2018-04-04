@@ -16,7 +16,7 @@ import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.fragment_offers.view.*
 
-class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout.OnRefreshListener {
+class OffersFragment : Fragment(), StarView, SwipeRefreshLayout.OnRefreshListener, RequestCallBack<OffersList> {
 
     lateinit var offersList: OffersList
 
@@ -41,13 +41,13 @@ class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout
     }
 
     override fun onRefresh() {
-        WebClient.responseOffersRefresh(offersList.linksOffer(), this)
+        WebClient.allResponse(offersList.linksOffer(), this)
     }
 
-    override fun onSuccess(obj: Any) {
+    override fun OnSuccess(obj: OffersList) {
         popularRecyclerView(obj)
         isRefreshing()
-        offersList = obj as OffersList
+        offersList = obj
     }
 
     override fun onFail() {
@@ -62,6 +62,6 @@ class OffersFragment : Fragment(), StarView, RequestCallBack, SwipeRefreshLayout
     }
 
     override fun performRequest(startLinks: StartLinks) {
-        WebClient.responseOffers(startLinks.linkOffer(), this)
+        WebClient.allResponse(startLinks.linkOffer(), this)
     }
 }

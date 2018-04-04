@@ -8,15 +8,10 @@ import com.ninja.testninja.Fragments.LeadDetailFragment
 import com.ninja.testninja.Interfaces.ManageFragment
 import com.ninja.testninja.Interfaces.RequestCallBack
 import com.ninja.testninja.DataClass.Detail
-import com.ninja.testninja.Interfaces.NewInterfaceTest
 import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 
-class LeadDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment, NewInterfaceTest<Detail> {
-    override fun sucesso(obj: Detail) {
-        leadDetailFragment.popularFragment(obj)
-        title((obj as Detail).title())
-    }
+class LeadDeteilActivity : AppCompatActivity(), ManageFragment, RequestCallBack<Detail> {
 
     lateinit var leadDetailFragment: LeadDetailFragment
 
@@ -43,9 +38,9 @@ class LeadDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment,
                 .add(R.id.mainFragment, leadDetailFragment).commit()
     }
 
-    override fun onSuccess(obj: Any) {
+    override fun OnSuccess(obj: Detail) {
         leadDetailFragment.popularFragment(obj)
-        title((obj as Detail).title())
+        title(obj.title())
     }
 
     override fun onFail() {

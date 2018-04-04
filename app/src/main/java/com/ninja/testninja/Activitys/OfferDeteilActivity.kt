@@ -13,7 +13,7 @@ import com.ninja.testninja.Others.WebClient
 import com.ninja.testninja.R
 import kotlinx.android.synthetic.main.activity_detail_offer.*
 
-class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment {
+class OfferDeteilActivity : AppCompatActivity(), ManageFragment, RequestCallBack<Detail> {
 
     lateinit var detail: Detail
     lateinit var offerDetailFragment: OfferDetailFragment
@@ -27,7 +27,7 @@ class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment
 
         commit()
 
-        WebClient.responseNextOffers(intent.getStringExtra("link"), this)
+        WebClient.allResponse(intent.getStringExtra("link"), this)
 
         buttonRecusar.setOnClickListener {
             finish()
@@ -51,10 +51,10 @@ class OfferDeteilActivity : AppCompatActivity(), RequestCallBack, ManageFragment
                 .add(R.id.mainFragment, offerDetailFragment).commit()
     }
 
-    override fun onSuccess(obj: Any) {
+    override fun OnSuccess(obj: Detail) {
         offerDetailFragment.popularFragment(obj)
-        title((obj as Detail).title())
-        detail = obj as Detail
+        title(obj.title())
+        detail = obj
     }
 
     override fun onFail() {

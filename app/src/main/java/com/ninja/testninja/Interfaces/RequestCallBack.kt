@@ -1,6 +1,6 @@
 package com.ninja.testninja.Interfaces
 
-interface RequestCallBack {
-    fun onSuccess(obj: Any)
+interface RequestCallBack<T>{
+    fun OnSuccess(obj: T)
     fun onFail()
 }
